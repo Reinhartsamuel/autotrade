@@ -62,7 +62,11 @@ import Image from 'next/image';
     return (
       <Box
         bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}>
+        color={useColorModeValue('gray.700', 'gray.200')}
+        // position={'sticky'}
+        // bottom={0}
+        // width={'100%'}
+        >
         <Container
           as={Stack}
           maxW={'6xl'}
@@ -91,7 +95,7 @@ import Image from 'next/image';
             spacing={4}
             justify={{ base: 'center', md: 'space-between' }}
             align={{ base: 'center', md: 'center' }}>
-            <Text>© 2024 Autotrade. All rights reserved</Text>
+            <Text>© 2024 byScript. All rights reserved</Text>
             <Stack direction={'row'} spacing={6}>
               <SocialButton label={'Twitter'} href={'#'}>
                 <FaTwitter />
