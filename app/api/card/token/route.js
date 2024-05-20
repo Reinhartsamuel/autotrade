@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-export async function GET() {
+export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const card_number = searchParams.get("card_number");
   const card_cvv = searchParams.get("card_cvv");

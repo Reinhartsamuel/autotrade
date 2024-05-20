@@ -35,9 +35,18 @@ const firebaseConfigStaging = {
 
 // Initialize Firebase
 const app = initializeApp(app_mode === 'production' ? firebaseConfig : firebaseConfigStaging);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 const authFirebase = getAuth(app);
 const storage = getStorage(app);
 const db = getFirestore(app);
 
-export { authFirebase, db, analytics, storage };
+
+export const analytics = () => {
+    if (typeof window !== "undefined") {
+      return getAnalytics(app);
+    } else {
+      return null
+    }
+  }
+
+export { authFirebase, db, storage };
