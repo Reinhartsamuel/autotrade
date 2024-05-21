@@ -10,7 +10,7 @@ export async function POST(request) {
 
   const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
 
-  //create hash
+  //create hash 
   //SHA512(order_id+status_code+gross_amount+ServerKey)
   const hash = Base64.stringify(
     CryptoJS.SHA512(order_id + status_code + gross_amount + serverKey)
