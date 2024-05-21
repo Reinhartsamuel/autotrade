@@ -1,17 +1,13 @@
 'use client'
 
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
-import { getAnalytics } from "firebase/analytics";
-import { getStorage } from "firebase/storage";
+import { getAnalytics } from 'firebase/analytics';
+import { getStorage } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
 
-// Follow this pattern to import other Firebase services
-// import { } from 'firebase/<service>';
+const app_mode = process.env.NEXT_PUBLIC_APP_MODE;
 
-const app_mode = process.env.NEXT_PUBLIC_APP_MODE
-
-// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBIavwhCNLqUyYT6ZMKiR-myuKbkMOBs0A",
     authDomain: "saudagar-92dc2.firebaseapp.com",
@@ -22,7 +18,6 @@ const firebaseConfig = {
     measurementId: "G-XGCJN7DQEP"
 };
 
-
 const firebaseConfigStaging = {
     apiKey: "AIzaSyDJt25hHsouxWKaGAwX5lRqCGtv4v2vr18",
     authDomain: "saudagar-staging.firebaseapp.com",
@@ -31,22 +26,21 @@ const firebaseConfigStaging = {
     messagingSenderId: "167715247415",
     appId: "1:167715247415:web:e9b4812bdd936409a6f6b2",
     measurementId: "G-VFCZV24Z8W"
-}
+};
 
-// Initialize Firebase
-const app = initializeApp(app_mode === 'production' ? firebaseConfig : firebaseConfigStaging);
-// const analytics = getAnalytics(app);
+const config = app_mode === 'production' ? firebaseConfig : firebaseConfigStaging;
+
+const app = !getApps().length ? initializeApp(config) : getApp();
 const authFirebase = getAuth(app);
 const storage = getStorage(app);
 const db = getFirestore(app);
 
-
 export const analytics = () => {
-    if (typeof window !== "undefined") {
-      return getAnalytics(app);
+    if (typeof window !== 'undefined') {
+        return getAnalytics(app);
     } else {
-      return null
+        return null;
     }
-  }
+};
 
 export { authFirebase, db, storage };

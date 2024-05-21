@@ -43,10 +43,12 @@ export default function FeatureComponent () {
     setLoading(true)
     const data = {
       email : 'reinhartsams@gmail.com',
-      phone : '087806848932',
+      name : inputData?.name || '',
+      phone : inputData?.phone || '087806848932',
       createdAt : new Date(),
       lastUpdated : new Date(),
       paymentStatus : 'PENDING',
+      amount: 150000,
       ...inputData
     }
     try {
@@ -123,6 +125,17 @@ export default function FeatureComponent () {
                   }}
                   onChange={(e) => setInputData({ ...inputData, name : e.target.value})}
                   defaultValue={authFirebase.currentUser?.displayName || ''}
+                />
+                <Input
+                  placeholder='Phone'
+                  bg={"gray.100"}
+                  border={0}
+                  color={"gray.500"}
+                  _placeholder={{
+                    color: "gray.500",
+                  }}
+                  onChange={(e) => setInputData({ ...inputData, phone : e.target.value})}
+                  defaultValue={authFirebase.currentUser?.phoneNumber || ''}
                 />
                 <Input
                   placeholder='Email'

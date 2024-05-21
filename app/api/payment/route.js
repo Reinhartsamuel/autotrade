@@ -8,21 +8,21 @@ export async function POST(request) {
   let snap = new midtransClient.Snap({
     // Set to true if you want Production Environment (accept real transaction).
     isProduction: false,
-    serverKey: "SB-Mid-server-49VuoSq7NIlNfHfR4dSqIpQ4",
+    serverKey: process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX,
   });
 
   let parameter = {
     transaction_details: {
-      order_id: "orderid" +  new Date().getTime(),
-      gross_amount: 10000,
+      order_id: body?.orderId,
+      gross_amount: body?.amount,
     },
     credit_card: {
       secure: true,
     },
     customer_details: {
-      first_name: body.first_name,
-      last_name: body.last_name,
-      email: body.email,
+      first_name: body?.first_name,
+      last_name: body?.last_name,
+      email: body?.email,
       phone: body?.phone,
     },
   };

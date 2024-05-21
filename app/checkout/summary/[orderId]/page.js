@@ -2,7 +2,7 @@ import { Box, Button, HStack, Heading, Stack, Text } from "@chakra-ui/react";
 import React from "react";
 import SummaryComponent from './SummaryComponent'
 
-const page = async () => {
+const page = async ({params}) => {
   return (
     <>
       <Stack
@@ -11,7 +11,7 @@ const page = async () => {
         alignItems={"center"}
         justifyContent={"center"}
       >
-        <SummaryComponent />
+        <SummaryComponent params={params}/>
       </Stack>
     </>
   );
