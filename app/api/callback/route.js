@@ -6,7 +6,7 @@ const appMode = process.env.NEXT_PUBLIC_APP_MODE;
 
 export async function POST(request) {
   const body = await request.json();
-  const { order_id, status_code, gross_amount } = body;
+  const { order_id, status_code, gross_amount,transaction_status } = body;
 
   const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
 
