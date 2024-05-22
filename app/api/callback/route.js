@@ -6,20 +6,19 @@ const appMode = process.env.NEXT_PUBLIC_APP_MODE;
 
 export async function POST(request) {
   const body = await request.json();
-  const { order_id, status_code, gross_amount,transaction_status } = body;
+  const { order_id, status_code, gross_amount,transaction_status, signature_key } = body;
 
   const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
 
   //create hash 
-  //SHA512(order_id+status_code+gross_amount+ServerKey)
-  const hash = Base64.stringify(
-    CryptoJS.SHA512(order_id + status_code + gross_amount + serverKey)
-  );
+  const hash = CryptoJS.SHA512(order_id + status_code + gross_amount + serverKey)
+  const hashString = hash.toString(CryptoJS.enc.Hex);
   
-  if (body?.signature_key !== hash) {
-    return Response.json({ status: false, message: "Invalid signature key" });
+  //compare signature key
+  if (signature_key !== hashString) {
+    return Response.json({ status: false, message: "Invalid signature key", serverKey, hashString, signature_key });
   }
-  
+  //update payment status only if transaction status is settlement
   if (transaction_status === "settlement") {
     try {
       await db.collection("orders").doc(order_id).update({
