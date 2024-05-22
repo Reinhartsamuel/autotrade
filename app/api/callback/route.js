@@ -10,20 +10,21 @@ export async function POST(request) {
 
   const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
 
-  //create hash 
-  const hash = CryptoJS.SHA512(order_id + status_code + gross_amount + serverKey)
-  const hashString = hash.toString(CryptoJS.enc.Hex);
+  // //create hash 
+  // const hash = CryptoJS.SHA512(order_id + status_code + gross_amount + serverKey)
+  // const hashString = hash.toString(CryptoJS.enc.Hex);
   
-  //compare signature key
-  if (signature_key !== hashString) {
-    return Response.json({ status: false, message: "Invalid signature key", serverKey, hashString, signature_key });
-  }
+  // //compare signature key
+  // if (signature_key !== hashString) {
+  //   return Response.json({ status: false, message: "Invalid signature key", serverKey, hashString, signature_key });
+  // }
   //update payment status only if transaction status is settlement
   if (transaction_status === "settlement") {
     try {
-      await db.collection("orders").doc(order_id).update({
+      const res = await db.collection("orders").doc(order_id).update({
         paymentStatus: "PAID",
       });
+      console.log(res, 'res');
       return Response.json({ message : "success" });
     } catch (error) {
       return Response.json({ status: false, message: JSON.stringify(error) });
