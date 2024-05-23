@@ -15,7 +15,7 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
@@ -23,11 +23,11 @@ import React, { useEffect, useState } from "react";
 import { authFirebase } from "../config/firebase";
 
 const Links = [
-  {name : "Home",link : '/'}, 
-  {name : "Pricing", link : 'pricing'},
-  {name : "Events", link : 'event'},
-  {name : "Subscription", link : 'subscription'},
-  {name : "Akademi", link : 'academy'},
+  { name: "Home", link: "/" },
+  { name: "Pricing", link: "pricing" },
+  { name: "Events", link: "event" },
+  { name: "Subscription", link: "subscription" },
+  { name: "Akademi", link: "academy" },
 ];
 
 const NavLink = ({ children }) => (
@@ -48,7 +48,7 @@ const NavLink = ({ children }) => (
 export default function NavbarChakra() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, setUser] = useState(authFirebase.currentUser);
-  const router = useRouter()
+  const router = useRouter();
   const handleLogout = async () => {
     try {
       await authFirebase.signOut();
@@ -71,7 +71,7 @@ export default function NavbarChakra() {
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4} bgGradient={"linear(to-l, gray.200, blue.700)"}>
+      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -81,7 +81,21 @@ export default function NavbarChakra() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Image width={50} alt={'byscript'} src={'https://i.ibb.co.com/RB9rQy3/Whats-App-Image-2024-05-19-at-16-02-06.jpg'} />
+            <Box
+              bg='red'
+              overflow={"hidden"}
+              borderRadius={10}
+              transition='transform 0.2s'
+              _hover={{ transform: "scale(1.2)" }}
+            >
+              <Image
+                width={35}
+                alt={"byscript"}
+                src={
+                  "https://i.ibb.co.com/RB9rQy3/Whats-App-Image-2024-05-19-at-16-02-06.jpg"
+                }
+              />
+            </Box>
             <HStack
               as={"nav"}
               spacing={4}
@@ -93,40 +107,44 @@ export default function NavbarChakra() {
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
-          {user ? (
-           <></>
-          ) : (
-            <Button size={"sm"} onClick={() => router.push("/auth/login")}>
-              Login
-            </Button>
-          )}
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  src={user?.photoURL}
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem><a href={'/orders'}>Orders</a></MenuItem>
-                <MenuItem>Payments</MenuItem>
-                <MenuDivider />
-                <MenuItem onClick={handleLogout} fontWeight={'bold'}>Logout</MenuItem>
-              </MenuList>
-            </Menu>
+            {user ? (
+              <>
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    rounded={"full"}
+                    variant={"link"}
+                    cursor={"pointer"}
+                    minW={0}
+                  >
+                    <Avatar size={"sm"} src={user?.photoURL} />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>
+                      <a href={"/orders"}>Orders</a>
+                    </MenuItem>
+                    <MenuItem>Payments</MenuItem>
+                    <MenuDivider />
+                    <MenuItem onClick={handleLogout} fontWeight={"bold"}>
+                      Logout
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </>
+            ) : (
+              <Button onClick={() => router.push("/auth/login")}  bgGradient={"linear(to-l,#8C52FF,#031B4B)"} _active={{
+                bg: "blue.700",
+              }}>
+                Login
+              </Button>
+            )}
           </Flex>
         </Flex>
 
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {Links.map((link,i ) => (
+              {Links.map((link, i) => (
                 <NavLink key={i}>{link}</NavLink>
               ))}
             </Stack>
