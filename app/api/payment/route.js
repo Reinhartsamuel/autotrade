@@ -50,7 +50,7 @@ export async function POST(request) {
       }
       return Response.json({ data: {...trx}, body });
   } catch (error) {
-    return Response.json({status : false, message : error.message, data : "Error creating snap payment", body})
+    return Response.json({status : false, message : error.message, data : "Error creating snap payment", body, parameter,serverKey})
   }
 
 
