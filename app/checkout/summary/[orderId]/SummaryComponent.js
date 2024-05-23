@@ -2,7 +2,7 @@
 import { Box, Button, Heading, Stack, Text, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { authFirebase, db } from '../../../config/firebase';
-import { doc, getDoc } from 'firebase/firestore/lite';
+import { doc, getDoc, setDoc } from 'firebase/firestore/lite';
 
 const SummaryComponent = ({ params }) => {
   const [loading, setLoading] = useState(false);
@@ -11,6 +11,7 @@ const SummaryComponent = ({ params }) => {
 
 
   const handleTransfer = async () => {
+    if (orderData?.paymentLink) return window.open(orderData?.paymentLink, "_blank");
     setLoading(true);
     try {
       const res = await fetch("/api/payment", {
@@ -30,13 +31,17 @@ const SummaryComponent = ({ params }) => {
       const result = await res.json();
       if (result?.data?.redirect_url) {
         window.open(result?.data?.redirect_url, "_blank");
+        await setDoc(doc(db, "orders", params.orderId), {
+          paymentLink : result?.data?.redirect_url
+        },{merge : true});
+        getOrderData();
       } else {
         toast({
           status : 'error',
           description: JSON.stringify(result.data)
         })
       }
-      console.log(result);
+      // console.log(result);
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -48,7 +53,6 @@ const SummaryComponent = ({ params }) => {
     try {
       const docSnap = await getDoc(doc(db, "orders", params.orderId));
       setOrderData({id:docSnap.id, ...docSnap.data()});
-      console.log({id:docSnap.id, ...docSnap.data()}, 'order data');
     } catch (error) {
       console.log(error.message, 'error getting order data');
     }
