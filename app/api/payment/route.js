@@ -29,6 +29,23 @@ export async function POST(request) {
 
   try {
       const trx = await snap.createTransaction(parameter);
+      try {
+        await fetch({
+          url : 'https://autotrade-tau.vercel.app/api/email',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            type : 'order',
+            email : body?.email,
+            name : body?.first_name + ' ' + body?.last_name
+          })
+        })
+      } catch (error) {
+        console.log(error.message, 'error sending email create order');
+        // return Response.json({status : false, message : error.message, data : "Error sending email create order", body})
+      }
       return Response.json({ data: {...trx}, body });
   } catch (error) {
     return Response.json({status : false, message : error.message, data : "Error creating snap payment", body})
