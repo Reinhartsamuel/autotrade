@@ -8,7 +8,8 @@ export async function POST(request) {
   const body = await request.json();
   const { order_id, status_code, gross_amount,transaction_status, signature_key } = body;
 
-  const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
+  // const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
+  const serverKey = 'B-Mid-server-49VuoSq7NIlNfHfR4dSqIpQ4'
   let error = undefined;
 
   //create hash 
