@@ -5,11 +5,11 @@ export async function POST(request) {
   const body = await request.json()
   // return Response.json({ ...body});
   // Create Snap API instance
-  const serverKey = 'B-Mid-server-49VuoSq7NIlNfHfR4dSqIpQ4'
+  // const serverKey = 'B-Mid-server-49VuoSq7NIlNfHfR4dSqIpQ4'
+  const serverKey = process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX;
   let snap = new midtransClient.Snap({
     // Set to true if you want Production Environment (accept real transaction).
     isProduction: false,
-    // serverKey: process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX,
     serverKey: serverKey
   });
 

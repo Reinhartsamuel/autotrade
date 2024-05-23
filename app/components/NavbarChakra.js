@@ -23,7 +23,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { authFirebase } from "../config/firebase";
 
-const Links = ["Dashboard", "Projects", "Team"];
+const Links = ["Home", "Orders", "Team"];
 
 const NavLink = ({ children }) => (
   <Link

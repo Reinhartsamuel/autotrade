@@ -16,7 +16,7 @@ export async function POST(request) {
       </div>
       <div>
       <p>
-      Hai, <strong>Reinhart</strong>
+      Hai, <strong>${body?.name}</strong>
       </p>
       <p>
       Pesanan kamu untuk Plan Pro byScript sedang kami proses. Segera selesaikan pesanan kamu
@@ -48,7 +48,7 @@ export async function POST(request) {
       </div>
       <div>
       <p>
-      Hai, <strong>Reinhart</strong>
+      Hai, <strong>${body?.name}</strong>
       </p>
       <p>
       Pesanan kamu untuk Plan Pro byScript sedang kami proses. Segera selesaikan pesanan kamu
