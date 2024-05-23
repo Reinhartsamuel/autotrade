@@ -144,8 +144,12 @@ export default function PricingComponent() {
                 <Box w='80%' pt={7}>
                   <Button
                     w='full'
-                    colorScheme='red'
-                    variant={x?.popular ? 'solid' : 'outline'}
+                    // colorScheme='red'
+                    bgGradient={"linear(to-l,#5DE1E6,#00205E)"}
+                    _hover={{
+                      bgGradient: "linear(to-l,#8C52FF,#031B4B)",
+                    }}
+                    // variant={x?.popular ? 'solid' : 'outline'}
                     onClick={() => router.push(`/checkout/?plan=${x?.name}`)}
                   >
                     Daftar

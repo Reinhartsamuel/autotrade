@@ -64,7 +64,7 @@ const SummaryComponent = ({ params }) => {
   return (
     <Box p={10} borderRadius={"md"} borderWidth={1}>
       <Stack direction={"column"} alignItems={"center"}>
-        <Heading size={"md"}>Order Summary #1231231</Heading>
+        <Heading size={"md"}>Order Summary #{params?.orderId}</Heading>
         <Text>Plan Sniper</Text>
         <Text>Rp 150,000</Text>
         <Stack direction={["column", "row"]}>

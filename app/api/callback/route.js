@@ -6,7 +6,7 @@ const appMode = process.env.NEXT_PUBLIC_APP_MODE;
 
 export async function POST(request) {
   const body = await request.json();
-  const { order_id, status_code, gross_amount,transaction_status, signature_key } = body;
+  const { order_id, status_code, gross_amount,transaction_status, signature_key, transaction_time } = body;
 
   // const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
   const serverKey = process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX
@@ -48,7 +48,8 @@ export async function POST(request) {
           body: JSON.stringify({
             type : 'callback',
             email : orderData?.email || '',
-            name : orderData?.name || ''
+            name : orderData?.name || '',
+            time : transaction_time
           })
         })
       } catch (error) {

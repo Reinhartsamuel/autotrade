@@ -49,7 +49,8 @@ export default function FeatureComponent () {
       lastUpdated : new Date(),
       paymentStatus : 'PENDING',
       amount: 150000,
-      ...inputData
+      uid : authFirebase?.currentUser?.uid || '',
+      ...inputData,
     }
     try {
       const docRef = await addDoc(collection(db, 'orders'), data);
@@ -160,6 +161,8 @@ export default function FeatureComponent () {
                   boxShadow: "xl",
                 }}
                 onClick={() => handlePayment('starter')}
+                isLoading={loading}
+                loadingText={'Memproses pesanan anda...'}
               >
                 Lanjutkan Ke Pembayaran {plan}
               </Button>

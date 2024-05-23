@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export async function POST(request) {
     const body = await request.json();
     const createOrderBody = `<html>
@@ -51,7 +53,8 @@ export async function POST(request) {
       Hai, <strong>${body?.name}</strong>
       </p>
       <p>
-      Pesanan kamu untuk Plan Pro byScript sedang kami proses. Segera selesaikan pesanan kamu
+        Pembayaran untuk Pro Plan Berhasil, waktu pembayaran ${moment(body?.time, 'YYYY-MM-DD HH:mm:ss').format('ddd, DD MMM YYYY HH:mm:ss')}, klik di 
+        <a href='https://autotrade-tau.vercel.app/'>sini</a> untuk melanjutkan.
       </p>
     
       </div>
