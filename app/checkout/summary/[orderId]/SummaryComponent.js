@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Stack, Text, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { authFirebase, db } from '../../../config/firebase';
 import { doc, getDoc } from 'firebase/firestore/lite';
@@ -7,6 +7,7 @@ import { doc, getDoc } from 'firebase/firestore/lite';
 const SummaryComponent = ({ params }) => {
   const [loading, setLoading] = useState(false);
   const [orderData, setOrderData] = useState({});
+  const toast = useToast();
 
 
   const handleTransfer = async () => {
@@ -29,6 +30,11 @@ const SummaryComponent = ({ params }) => {
       const result = await res.json();
       if (result?.data?.redirect_url) {
         window.open(result?.data?.redirect_url, "_blank");
+      } else {
+        toast({
+          status : 'error',
+          description: JSON.stringify(result.data)
+        })
       }
       console.log(result);
     } catch (error) {
