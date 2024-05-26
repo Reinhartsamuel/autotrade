@@ -19,7 +19,7 @@ import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { authFirebase, db } from '../config/firebase';
 import { useRouter } from 'next/navigation';
-import { addDoc, collection } from 'firebase/firestore/lite';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
 
 const Feature = ({ heading, text }) => {
   return (
@@ -34,12 +34,14 @@ const Feature = ({ heading, text }) => {
 
 export default function FeatureComponent () {
   const [loading, setLoading] = useState(false);
-  const [inputData, setInputData] = useState({name : authFirebase?.currentUser?.displayName, email : authFirebase?.currentUser?.email})
+  const [inputData, setInputData] = useState({name : authFirebase?.currentUser?.displayName, email : authFirebase?.currentUser?.email});
   const router = useRouter();
   const params = useSearchParams();
   const plan = params.get('plan')
+  const productId = params.get('id')
 
   const handlePayment = async () => {
+    // console.log(id)
     setLoading(true)
     const data = {
       email : 'reinhartsams@gmail.com',
@@ -48,12 +50,15 @@ export default function FeatureComponent () {
       createdAt : new Date(),
       lastUpdated : new Date(),
       paymentStatus : 'PENDING',
-      amount: 150000,
+      productId,
+      plan,
       uid : authFirebase?.currentUser?.uid || '',
       ...inputData,
     }
     try {
-      const docRef = await addDoc(collection(db, 'orders'), data);
+      const docSnap = await getDoc(doc(db, "products", productId));
+      const productData = docSnap.data();
+      const docRef = await addDoc(collection(db, 'orders'), {...data, product: productData, amount : productData?.price || 0});
       const id = docRef?.id
       if (id) router.push(`/checkout/summary/${id}/?plan=${plan}`);
     } catch (error) {
@@ -72,21 +77,8 @@ export default function FeatureComponent () {
         }}
         gap={4}
       >
-        <GridItem colSpan={1}>
-          <VStack alignItems='flex-start' spacing='20px'>
-            <chakra.h2 fontSize='3xl' fontWeight='700'>
-              Bayar 150k, dapatkan sinyal dari trading plan mu
-            </chakra.h2>
-            <Button colorScheme='green' size='md'>
-              Daftar Sekarang
-            </Button>
-            {/* <Box w={"100%"} h={"300"} bg={"gray"}>
-              video di sini
-            </Box> */}
-          </VStack>
-        </GridItem>
 
-        <GridItem>
+        <GridItem >
           <Stack
             bg={"gray.50"}
             rounded={"xl"}
@@ -110,8 +102,7 @@ export default function FeatureComponent () {
                 </Text>
               </Heading>
               <Text color={"gray.500"} fontSize={{ base: "sm", sm: "md" }}>
-                We’re looking for amazing engineers just like you! Become a part
-                of our rockstar engineering team and skyrocket your career!
+                Selesaikan pesanan anda, lalu tim kami akan menghubungi
               </Text>
             </Stack>
             <Box as={"form"} mt={5}>

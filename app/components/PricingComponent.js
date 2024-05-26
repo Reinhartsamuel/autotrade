@@ -15,42 +15,9 @@ import {
 import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import { priceFormat } from "../utils/priceFormat";
-
-const pricings = [
-  {
-    name: "BTC only",
-    price: 150000,
-    features: [
-      "1 Trading Plan",
-      "BTC only",
-      "Access trading plan di Trading View",
-      "< $2,000 balance saat pertama setup, harga 1% dari balance setelahnya",
-    ],
-    maxBalance : 2000
-  },
-  {
-    name: "2-40 Coin Pairs",
-    price: 250000,
-    features: [
-      "1 Trading Plan",
-      "up to 40 Coin Pairs",
-      "Access trading plan di Trading View",
-      "< $4,000 balance saat pertama setup, harga 1% dari balance setelahnya",
-    ],
-    popular : true,
-    maxBalance : 4000
-  },
-  {
-    name: "Bagi Hasil",
-    price: 350000,
-    features: [
-      "Keuntungan 50:50",
-      "Kekalahan 50:50",
-      "Pembagian hasil dilakukan setiap bulan pada tanggal 2",
-    ],
-    minBalance : 10000
-  },
-];
+import { cache, useEffect, useState } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 function PriceWrapper({ children }) {
   return (
@@ -70,6 +37,25 @@ function PriceWrapper({ children }) {
 
 export default function PricingComponent() {
   const router = useRouter();
+  const [prices, setPrices] = useState([]);
+  const getPricing = cache(async () => {
+    try {
+      const arr = [];
+      const q = query(collection(db, 'products'), where('type', '==', 'plan'));
+  
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+      arr.push({id : doc.id, ...doc.data()})
+      });
+      setPrices( arr)
+    } catch (error) {
+      console.log(error.message);
+    }
+  })
+
+  useEffect(() => {
+    getPricing()
+  } ,[])
   return (
     <Box py={12}>
       <VStack spacing={2} textAlign='center'>
@@ -88,7 +74,7 @@ export default function PricingComponent() {
         py={10}
         overflow={"auto"}
       >
-        {pricings?.map((x, i) => (
+        {prices?.map((x, i) => (
           <PriceWrapper key={i}>
             <Box position='relative'>
               {x.popular && <Box
@@ -123,9 +109,9 @@ export default function PricingComponent() {
                   <Text fontSize='4xl' fontWeight='900'>
                     {priceFormat(x.price)}
                   </Text>
-                  <Text fontSize='xl' color='gray.500'>
+                  {/* <Text fontSize='xl' color='gray.500'>
                     /bulan
-                  </Text>
+                  </Text> */}
                 </HStack>
               </Box>
               <VStack
@@ -150,7 +136,7 @@ export default function PricingComponent() {
                       bgGradient: "linear(to-l,#8C52FF,#031B4B)",
                     }}
                     // variant={x?.popular ? 'solid' : 'outline'}
-                    onClick={() => router.push(`/checkout/?plan=${x?.name}`)}
+                    onClick={() => router.push(`/checkout/?plan=${x?.name}&id=${x?.id}`)}
                   >
                     Daftar
                   </Button>

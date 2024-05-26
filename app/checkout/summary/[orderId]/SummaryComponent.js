@@ -2,7 +2,8 @@
 import { Box, Button, Heading, Stack, Text, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { authFirebase, db } from '../../../config/firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore/lite';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { priceFormat } from '../../../utils/priceFormat';
 
 const SummaryComponent = ({ params }) => {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ const SummaryComponent = ({ params }) => {
         },
         body: JSON.stringify({
           orderId: params.orderId,
-          amount : 150000,
+          amount : orderData?.amount || orderData?.product?.price,
           first_name : orderData?.name?.includes(' ') ? orderData?.name?.split(' ')[0] : orderData?.name,
           last_name : orderData?.name?.includes(' ') ? orderData?.name?.split(' ')[1] : '-',
           email : orderData?.email || '',
@@ -66,7 +67,7 @@ const SummaryComponent = ({ params }) => {
       <Stack direction={"column"} alignItems={"center"}>
         <Heading size={"md"}>Order Summary #{params?.orderId}</Heading>
         <Text>Plan Sniper</Text>
-        <Text>Rp 150,000</Text>
+        <Text>Rp {priceFormat(orderData?.product?.price)}</Text>
         <Stack direction={["column", "row"]}>
           <Button
             isDisabled={loading}
@@ -75,11 +76,11 @@ const SummaryComponent = ({ params }) => {
             colorScheme={"blue"}
             onClick={handleTransfer}
           >
-            Transfer
+            Selesaikan Pembayaran
           </Button>
-          <Button size={"sm"} colorScheme={"green"}>
+          {/* <Button size={"sm"} colorScheme={"green"}>
             Credit Card (Visa / Mastercard) / Gopay
-          </Button>
+          </Button> */}
         </Stack>
       </Stack>
     </Box>
