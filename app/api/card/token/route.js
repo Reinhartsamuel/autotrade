@@ -1,4 +1,4 @@
-const axios = require("axios");
+import axios from 'axios';
 
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;

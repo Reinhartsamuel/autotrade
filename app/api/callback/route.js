@@ -1,8 +1,7 @@
 import CryptoJS from "crypto-js";
-import Base64 from "crypto-js/enc-base64";
 import { db } from "../../../lib/firebase-admin-config";
 
-const appMode = process.env.NEXT_PUBLIC_APP_MODE;
+// const appMode = process.env.NEXT_PUBLIC_APP_MODE;
 
 export async function POST(request) {
   const body = await request.json();
@@ -10,7 +9,7 @@ export async function POST(request) {
 
   // const serverKey = appMode === "staging" ?  process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX : "kontoll"
   const serverKey = process.env.NEXT_PUBLIC_MIDTRANS_SERVER_KEY_SANDBOX
-  let error = undefined;
+  let errorData = undefined;
 
   //create hash 
   const hash = CryptoJS.SHA512(order_id + status_code + gross_amount + serverKey)
@@ -54,10 +53,10 @@ export async function POST(request) {
         })
       } catch (error) {
         console.log(error.message, 'error sending email create order');
-        error = error.message
+        errorData = error.message
         // return Response.json({status : false, message : error.message, data : "Error sending email create order", body})
       }
-      return Response.json({ message : "success", error });
+      return Response.json({ message : "success", error: errorData });
     } catch (error) {
       return Response.json({ status: false, message: JSON.stringify(error) });
     }

@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import FeatureComponent from "../components/FeatureComponent";
 import { Box, Stack } from "@chakra-ui/react";
 
