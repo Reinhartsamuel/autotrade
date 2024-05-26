@@ -61,5 +61,7 @@ export async function POST(request) {
     } catch (error) {
       return Response.json({ status: false, message: JSON.stringify(error) });
     }
+  } else {
+    return Response.json({ status: false, message: "Transaction status not settlement" });
   }
 }

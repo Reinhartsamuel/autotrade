@@ -9,6 +9,7 @@ const page = async () => {
       <Container maxW={"5xl"}>
         <Heading>Events</Heading>
         <Center w={"full"}>
+          
       
         </Center>
       </Container>
