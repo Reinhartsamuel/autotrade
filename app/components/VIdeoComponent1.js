@@ -11,7 +11,7 @@ const VIdeoComponent1 = () => {
         <iframe
           width={width}
           height={height}
-          src='https://www.youtube.com/embed/mkTEEOSRmFA?autoplay=1&mute=1'
+          src='https://www.youtube.com/embed/OKJuIOZBxB0?autoplay=1&mute=1'
         ></iframe>
       </Box>
     </>

@@ -88,6 +88,7 @@ export default function Testimonials() {
   return (
     <Box 
     // bg={useColorModeValue('gray.100', 'gray.700')}
+    bgGradient={"linear(to-b,black,gray.700)"} 
     >
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
@@ -99,34 +100,28 @@ export default function Testimonials() {
           spacing={{ base: 10, md: 4, lg: 10 }}>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Efficient Collaborating</TestimonialHeading>
+              <TestimonialHeading>Luar Biasa</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+              kurang dari seminggu aktifin auto trade porto udah mulai hijau
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              src={'https://i.ibb.co.com/kQBpZdB/mustafa.jpg'}
+              name={'Om Mustafa'}
+              title={'Pensiunan'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Intuitive Design</TestimonialHeading>
+              <TestimonialHeading>Diajarin Bikin Algoritma</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+              Bisa belajar coding pine script dari 0 sampai sekarang punya trading plan sendiri bahkan sudah bisa mengaktifkan auto trade sendiri untuk tradingnya sendiri 
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
-              }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              src={'https://i.ibb.co.com/dbFLJX1/alvin.jpg'}
+              name={'Alvin'}
+              title={'Pekerja Swasta non-IT'}
             />
           </Testimonial>
           <Testimonial>

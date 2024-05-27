@@ -1,4 +1,6 @@
 import {
+  Badge,
+  Box,
   Button,
   Flex,
   Heading,
@@ -11,14 +13,24 @@ import VIdeoComponent1 from './components/VIdeoComponent1';
 import PricingComponent from './components/PricingComponent';
 import { Suspense } from 'react';
 import Testimonials from './components/Testimonials'
+import bg from '../public/9019808.jpg';
 
 export default function Home() {
   return (
     <Stack minW={'100%'}>
-      <Stack minH={"100vh"} direction={{ base: "column", md: "row" }} bgGradient={"linear(to-b,black,gray.700)"}>
-        <Flex p={8} flex={1} align={"center"} justify={"center"}>
-          <Stack spacing={6} w={"full"} maxW={"lg"}>
-            <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
+      <Stack 
+        minH={"100vh"} 
+        direction={{ base: "column", md: "row" }} 
+        // bgGradient={"linear(to-b,black,gray.700)"} 
+        bgImage={'https://img.freepik.com/free-vector/gradient-connection-background_23-2150462053.jpg?w=1800&t=st=1716838855~exp=1716839455~hmac=be8a1ad717cca295fdbe0769f50eed2e5f31f70e8fdc932b26c67b313ef6dca7'}
+      >
+      {/* <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}> */}
+        <Flex p={8} flex={1}  justify={"center"} flexDirection={'column'}>
+          <Box>
+            <Badge colorScheme={'yellow'} rounded={'full'} p={3}>Launching</Badge>
+          </Box>
+          <Stack spacing={6} w={"full"}>
+            <Heading fontSize={{ base: "3xl", md: "4xl", lg: "6xl" }}>
               <Text
                 as={"span"}
                 position={"relative"}
@@ -36,7 +48,7 @@ export default function Home() {
                 Stop trading manual
               </Text>
               <br />{" "}
-              <Text bgGradient={"linear(to-l,#5DE1E6,#00205E)"} as={"span"}>
+              <Text bgGradient={"linear(to-r,#5DE1E6,#00205E)"} as={"span"}>
                 otomatiskan trading plan kamu dengan byScript
               </Text>{" "}
             </Heading>

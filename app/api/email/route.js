@@ -87,6 +87,7 @@ export async function POST(request) {
     htmlContent: body?.type === 'order' ? createOrderBody : paidOrderBody
   }
 
+  if (body?.content) emailBody.htmlContent = body?.content;
 
     try {
         const res = await fetch('https://api.brevo.com/v3/smtp/email', {
