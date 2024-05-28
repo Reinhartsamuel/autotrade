@@ -33,6 +33,20 @@ export default function LoginPage() {
         const user = result.user;
         console.log(user);
         // navigate("/employee/dashboard");
+        try {
+          fetch('/api/email/login',{
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body : JSON.stringify({
+              name : user?.displayName || user?.email || '',
+              email : user?.email
+            })
+          })
+        } catch (error) {
+          
+        }
         setDoc(doc(db, "users", user.uid), {
           name: user?.displayName || "",
           lastLogin : new Date(),

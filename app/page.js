@@ -14,6 +14,7 @@ import PricingComponent from './components/PricingComponent';
 import { Suspense } from 'react';
 import Testimonials from './components/Testimonials'
 import bg from '../public/9019808.jpg';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -71,7 +72,7 @@ export default function Home() {
               >
                 Mulai Sekarang
               </Button>
-              <Button rounded={"full"} leftIcon={<FaPlay />}>Gimana Cara Kerjanya?</Button>
+              <Button rounded={"full"} leftIcon={<FaPlay />}><Link href={'#'}>Gimana Cara Kerjanya?</Link></Button>
             </Stack>
           </Stack>
         </Flex>
