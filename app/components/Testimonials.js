@@ -102,7 +102,7 @@ export default function Testimonials() {
             <TestimonialContent>
               <TestimonialHeading>Luar Biasa</TestimonialHeading>
               <TestimonialText>
-              kurang dari seminggu aktifin auto trade porto udah mulai hijau
+              kurang dari seminggu aktifin auto trade porto udah mulai hijau, proses cepat dan transparan bisa ketemuan langsung
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
