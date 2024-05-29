@@ -24,6 +24,7 @@ export default function Home() {
         direction={{ base: "column", md: "row" }} 
         // bgGradient={"linear(to-b,black,gray.700)"} 
         bgImage={'/9019808.jpg'}
+        pt={{base : 100, xl:0}}
       >
       {/* <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}> */}
         <Flex p={8} flex={1}  justify={"center"} flexDirection={'column'}>

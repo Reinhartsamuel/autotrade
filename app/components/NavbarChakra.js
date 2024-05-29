@@ -71,7 +71,7 @@ export default function NavbarChakra() {
 
   return (
     <>
-      <Box px={4} position={'fixed'} w={'full'} zIndex={1}>
+      <Box px={4} position={'fixed'} w={'full'} zIndex={2} id='scroller'>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
