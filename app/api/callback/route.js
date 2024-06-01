@@ -1,5 +1,5 @@
 import CryptoJS from "crypto-js";
-import { db } from "../../../lib/firebase-admin-config";
+import { adminDb } from "../../../lib/firebase-admin-config";
 
 // const appMode = process.env.NEXT_PUBLIC_APP_MODE;
 
@@ -23,7 +23,7 @@ export async function POST(request) {
 
   let orderData = {};
   try {
-    const docSnap = await db.collection("orders").doc(order_id).get();
+    const docSnap = await adminDb.collection("orders").doc(order_id).get();
     orderData = {id : docSnap.id, ...docSnap.data()};
     // return Response.json({...orderData})
   } catch (error) {
@@ -32,7 +32,7 @@ export async function POST(request) {
   // update payment status only if transaction status is settlement
   if (transaction_status === "settlement") {
     try {
-      const res = await db.collection("orders").doc(order_id).update({
+      const res = await adminDb.collection("orders").doc(order_id).update({
         paymentStatus: "PAID",
       });
       console.log(res, 'res');

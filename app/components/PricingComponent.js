@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { FaCheckCircle } from "react-icons/fa";
 import { priceFormat } from "../utils/priceFormat";
 import { cache, useEffect, useState } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { collection, getDocs, query, where, sortBy, orderBy } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 function PriceWrapper({ children }) {
@@ -41,7 +41,9 @@ export default function PricingComponent() {
   const getPricing = cache(async () => {
     try {
       const arr = [];
-      const q = query(collection(db, 'products'), where('type', '==', 'plan'));
+      const productsRef = collection(db, 'products');
+      const q = query(productsRef, where('type', '==', 'plan'), orderBy('price', 'asc'));
+      // const q = query(collection(db, 'products'), where('type', '==', 'plan'));
   
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -57,7 +59,7 @@ export default function PricingComponent() {
     getPricing()
   } ,[])
   return (
-    <Box py={12}>
+    <Box py={20} id='pricing'>
       <VStack spacing={2} textAlign='center'>
         <Heading as='h1' fontSize='4xl'>
           Pilih Plan
@@ -115,7 +117,7 @@ export default function PricingComponent() {
                 </HStack>
               </Box>
               <VStack
-                bg={useColorModeValue("gray.50", "gray.700")}
+                // bg={useColorModeValue("gray.50", "gray.700")}
                 py={4}
                 borderBottomRadius={"xl"}
               >

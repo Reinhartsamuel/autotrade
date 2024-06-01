@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { authFirebase, db } from '../../../config/firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { priceFormat } from '../../../utils/priceFormat';
+import { FaRegCopy } from 'react-icons/fa';
 
 const SummaryComponent = ({ params }) => {
   const [loading, setLoading] = useState(false);
@@ -65,9 +66,20 @@ const SummaryComponent = ({ params }) => {
   return (
     <Box p={10} borderRadius={"md"} borderWidth={1}>
       <Stack direction={"column"} alignItems={"center"}>
-        <Heading size={"md"}>Order Summary #{params?.orderId}</Heading>
-        <Text>Plan Sniper</Text>
-        <Text>Rp {priceFormat(orderData?.product?.price)}</Text>
+        <Heading size={"md"}>Terima kasih sudah mengorder {orderData?.product?.price}</Heading>
+        <Text>Order ID #{params?.orderId}</Text>
+
+        <Box my={20} justifyContent={'center'} alignItems={'center'} display={'flex'} flexDirection={'column'}>
+          <Text>Untuk menyelesaikan proses order, silakan transfer sejumlah </Text>
+          <Heading size={'md'}>Rp {priceFormat(orderData?.product?.price)}</Heading>
+          <Button variant={'outline'} my={10}><FaRegCopy mx={2}/>Salin Jumlah</Button>
+        </Box>
+
+
+        <Box my={10} justifyContent={'center'} alignItems={'center'} display={'flex'} flexDirection={'column'}>
+          <Text>Ke brekening bank di bawah ini:</Text>
+          
+        </Box>
         <Stack direction={["column", "row"]}>
           <Button
             isDisabled={loading}

@@ -24,7 +24,7 @@ import { authFirebase } from "../config/firebase";
 
 const Links = [
   { name: "Home", link: "/" },
-  { name: "Pricing", link: "pricing" },
+  { name: "Pricing", link: "#pricing" },
   { name: "Events", link: "event" },
   { name: "Subscription", link: "subscription" },
   { name: "Akademi", link: "academy" },
@@ -71,8 +71,8 @@ export default function NavbarChakra() {
 
   return (
     <>
-      <Box px={4} position={'fixed'} w={'full'} zIndex={2} id='scroller'>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller'>
+        <Flex zIndex={2} h={16} alignItems={"center"} justifyContent={"space-between"} position={'relative'}>
           <IconButton
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -139,6 +139,7 @@ export default function NavbarChakra() {
               </Button>
             )}
           </Flex>
+          <Box w={'full'} h={16} position={'absolute'} style={{backdropFilter: 'blur(5px)'}} zIndex={-1}></Box>
         </Flex>
 
         {isOpen ? (
