@@ -144,8 +144,7 @@ export default function Home() {
       >
         <Center>
           <Heading>Seberapa jauh <i>journey</i> trading-mu?</Heading>
-        </Center>
-        <HStack gap={10} position={'relative'}>
+        </Center><SimpleGrid columns={{base:1, lg:2}} gap={{base:2,xl:10}} position={'relative'}>
           <Box
             zIndex={-1}
             w={{ base: 300, md: 500, lg: 800 }}
@@ -174,7 +173,7 @@ export default function Home() {
             }}
             position={'absolute'}
           ></Box>
-        </HStack>
+        </SimpleGrid>
         <Image
           mt={10}
           borderRadius={'20px'}
@@ -187,15 +186,16 @@ export default function Home() {
 
 
       <Stack
+        mt={30}
         p={{ base: 10, lg: 30 }}
         h={'100vh'}
         alignItems={'center'}
         justifyContent={'center'}
       >
         <Center>
-          <Heading>Belum Punya Trading Plan?</Heading>
+          <Heading textAlign={'center'}>Sudah Punya Trading Plan Kamu Sendiri?</Heading>
         </Center>
-        <HStack gap={10} position={'relative'}>
+        <SimpleGrid columns={{base:1, lg:2}} gap={{base:2,xl:10}} position={'relative'}>
           <Box
             zIndex={-1}
             w={{ base: 300, md: 500, lg: 800 }}
@@ -206,10 +206,10 @@ export default function Home() {
             position={'absolute'}
           ></Box>
           <Button variant={'outline'} colorScheme={'red'} p={5}>
-            <Heading size={'md'}>Saya belum pernah trading</Heading>
+            <Heading size={'md'}>Saya belum punya trading plan</Heading>
           </Button>
           <Button variant={'outline'} colorScheme={'green'} p={5}>
-            <Heading size={'md'}>Saya sudah pernah trading</Heading>
+            <Heading size={'md'}>Saya sudah punya trading plan</Heading>
           </Button>
           <Box
             zIndex={-1}
@@ -224,7 +224,7 @@ export default function Home() {
             }}
             position={'absolute'}
           ></Box>
-        </HStack>
+        </SimpleGrid>
         <Image
           mt={10}
           borderRadius={'20px'}
