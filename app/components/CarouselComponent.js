@@ -40,7 +40,7 @@ export default function CarouselComponent({ cardsx, arrowButton }) {
   return (
     <Box
       position={'relative'}
-      height={'600px'}
+      height={{base:'200px', md:'300px', lg:'400px',xl:'600px'}}
       width={'full'}
       overflow={'hidden'}
     >

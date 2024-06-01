@@ -1,8 +1,11 @@
+
 'use client'
 import {
     Box,
     chakra,
     Container,
+    Flex,
+    Heading,
     Link,
     Stack,
     Text,
@@ -74,7 +77,10 @@ import Image from 'next/image';
           spacing={4}
           justify={'center'}
           align={'center'}>
-          <Image alt='logo' src={'/algotraderlogo.png'} width={200} height={30} /> 
+          <Flex>
+            <Image alt='logo' src={'/byscriptlogo.jpeg'} width={30} height={30} /> 
+            <Heading size={'md'} bgGradient={'linear(to-r,#5DE1E6,#00205E)'} bgClip={'text'}>byScript</Heading>
+          </Flex>
           <Stack direction={'row'} spacing={6}>
             <Link href={'#'}>Home</Link>
             <Link href={'#'}>About</Link>

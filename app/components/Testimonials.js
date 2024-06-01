@@ -88,7 +88,8 @@ export default function Testimonials() {
   return (
     <Box 
     // bg={useColorModeValue('gray.100', 'gray.700')}
-    bgGradient={"linear(to-b,black,gray.700)"} 
+    // bgGradient={"linear(to-b,black,gray.700)"} 
+    minH={'100vh'}
     >
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>

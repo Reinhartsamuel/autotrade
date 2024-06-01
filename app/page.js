@@ -77,19 +77,21 @@ export default function Home() {
               <strong>di-backtesting</strong>
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-              <Button
-                rounded={'full'}
-                bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-                _active={{
-                  bg: 'blue.700',
-                }}
-              >
-                Mulai Sekarang
-              </Button>
+              <Link href={'#pricing'}>
+                <Button
+                  rounded={'full'}
+                  bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }}
+                  _active={{
+                    bg: 'blue.700',
+                  }}
+                >
+                  Mulai Sekarang
+                </Button>
+              </Link>
               <Button rounded={'full'} leftIcon={<FaPlay />}>
                 <Link href={'#'}>Gimana Cara Kerjanya?</Link>
               </Button>
@@ -101,9 +103,9 @@ export default function Home() {
           <Image borderRadius={'30'} w={'full'} aria-label='trading' src={'/signal1.png'} alt={'ss'}/>
         </Flex>
       </Stack>
-      <Stack p={{ base: 10, lg: 30 }} minH={'100vh'}>
+      <Stack p={{ base: 10, lg: 30 }} minH={'100vh'} position={'relative'}>
 
-        <SimpleGrid columns={{base:1, lg:2}}>
+        <SimpleGrid columns={{base:1, lg:2}}alignItems={'center'}>
           <Heading>
             Trading plan kamu sendiri, tanpa screening berjam-jam atau tarik
             garis{' '}
@@ -116,17 +118,17 @@ export default function Home() {
           </Heading>
           <CarouselComponent />
         </SimpleGrid>
-        <SimpleGrid
-          columns={{ base: 1, lg: 2 }}
-          gap={2}
-          h={'80%'}
-          alignItems={'center'}
-        >
-          <Image src={'/pinescript.jpeg'} alt={'pine'} />
-          <Image src={'/backtest.jpeg'} alt={'pine'} />
-        </SimpleGrid>
+      <Box
+          zIndex={-1}
+          w={{ base: 300, sm: 400, md: 500, lg: 800 }}
+          h={{ base: 300, sm: 400, md: 500, lg: 800 }}
+          bgGradient={'linear(to-l,#5DE1E6, #031B4B)'}
+          borderRadius={'full'}
+          filter={{ base: 'blur(50px)', md: 'blur(80px)', lg: 'blur(200px)' }}
+          style={{ transform: 'translateX(-100%)' }}
+          position={'absolute'}
+        ></Box>
       </Stack>
-
       <StepsComponent />
       <Testimonials />
       <Stack
@@ -169,6 +171,57 @@ export default function Home() {
           ></Box>
         </HStack>
         <Image
+          mt={10}
+          borderRadius={'20px'}
+          w={{ base: '100%', lg: '80%' }}
+          src={'/backtest.jpeg'}
+          alt={'pine'}
+        />
+      </Stack>
+      
+
+
+      <Stack
+        p={{ base: 10, lg: 30 }}
+        h={'100vh'}
+        alignItems={'center'}
+        justifyContent={'center'}
+      >
+        <Center>
+          <Heading>Belum Punya Trading Plan?</Heading>
+        </Center>
+        <HStack gap={10} position={'relative'}>
+          <Box
+            zIndex={-1}
+            w={{ base: 300, md: 500, lg: 800 }}
+            h={{ base: 100, md: 200, lg: 800 }}
+            bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+            borderRadius={'full'}
+            style={{ filter: 'blur(100px)' }}
+            position={'absolute'}
+          ></Box>
+          <Button variant={'outline'} colorScheme={'red'} p={5}>
+            <Heading size={'md'}>Saya belum pernah trading</Heading>
+          </Button>
+          <Button variant={'outline'} colorScheme={'green'} p={5}>
+            <Heading size={'md'}>Saya sudah pernah trading</Heading>
+          </Button>
+          <Box
+            zIndex={-1}
+            w={{ base: 300, md: 500, lg: 800 }}
+            h={{ base: 100, md: 200, lg: 800 }}
+            bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+            borderRadius={'full'}
+            style={{
+              filter: 'blur(100px)',
+              transform: 'translateX(-100%)',
+              top: 0,
+            }}
+            position={'absolute'}
+          ></Box>
+        </HStack>
+        <Image
+          mt={10}
           borderRadius={'20px'}
           w={{ base: '100%', lg: '80%' }}
           src={'/backtest.jpeg'}

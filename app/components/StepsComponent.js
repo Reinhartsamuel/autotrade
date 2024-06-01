@@ -12,6 +12,7 @@ import {
   Image,
   SimpleGrid,
   Stack,
+  Text,
   VStack,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -67,6 +68,7 @@ const StepsComponent = () => {
       >
         <Grid
           //   h='800'
+          mt={20}
           w={'full'}
           templateRows='repeat(1, 1fr)'
           templateColumns='repeat(17, 1fr)'
@@ -102,6 +104,7 @@ const StepsComponent = () => {
             paddingRight={7}
           >
             <Heading>Pilih Indikator Favoritmu</Heading>
+            <Text fontFamily={'monospace'}>Pilih indikator yang ingin kamu gunakan</Text>
             <Slide cascade={true}>
               <SimpleGrid columns={{ base: 2, lg: 3 }} gap={1}>
                 {indicators.map((x, i) => (
@@ -133,6 +136,7 @@ const StepsComponent = () => {
         </Grid>
         <Grid
           //   h='800'
+          mt={20}
           w={'full'}
           templateRows='repeat(1, 1fr)'
           templateColumns='repeat(17, 1fr)'
@@ -167,45 +171,132 @@ const StepsComponent = () => {
             // overflow={'scroll'}
             paddingRight={7}
           >
-            <Heading mt={10} mb={5}zIndex={2}>Coding Algoritma</Heading>
+            <Heading mt={10}  zIndex={1} position={'relative'}>
+              Coding Algoritma
+            </Heading>
+            <Text mb={5} position={'relative'} zIndex={1} fontFamily={'monospace'}><i>Coding</i> di dalam pinescript editor</Text>
             <Slide cascade={true}>
-              <Box width={'50%'}>
-                <GlowingImage src={'/backtest.jpeg'} alt={'pine'} />
+              <Box width={{ base: '100%', xl: '80%' }}>
+                <GlowingImage
+                  src={'/pinescript.jpeg'}
+                  alt={'pine'}
+                  bg={'linear-gradient(0deg, #8C52FF, #00205E)'}
+                />
+              </Box>
+            </Slide>
+          </GridItem>
+        </Grid>
+        <Grid
+          //   h='800'
+          mt={20}
+          w={'full'}
+          templateRows='repeat(1, 1fr)'
+          templateColumns='repeat(17, 1fr)'
+          gap={1}
+        >
+          <GridItem rowSpan={1} colSpan={1} h='full'>
+            <Center direction={'column'} h='full'>
+              <VStack h='full'>
+                <FcCandleSticks size={30} />
+                <Fade
+                  direction={'down'}
+                  duration={'2000'}
+                  style={{ height: '100%' }}
+                >
+                  <Box
+                    overflow={'hidden'}
+                    rounded={'full'}
+                    width='2px'
+                    p='2px'
+                    h='full'
+                    bgGradient='linear(to-b, transparent, pink.500)'
+                  >
+                    <div></div>
+                  </Box>
+                </Fade>
+              </VStack>
+            </Center>
+          </GridItem>
+          <GridItem
+            transition={'linear 2s'}
+            colSpan={16}
+            // overflow={'scroll'}
+            paddingRight={7}
+          >
+            <Heading mt={10}  zIndex={1} position={'relative'}>
+              Backtesting
+            </Heading>
+            <Text mb={5} position={'relative'} zIndex={1} fontFamily={'monospace'}>Test algoritma trading plan kamu dengan melihat histori harga coin sampai 10 tahun ke belakang</Text>
+            <Slide cascade={true}>
+              <Box width={{ base: '100%', xl: '80%' }}>
+                <GlowingImage
+                  src={'/backtest.jpeg'}
+                  alt={'pine'}
+                  bg={'linear-gradient(0deg, #8C52FF, #00205E)'}
+                />
               </Box>
             </Slide>
           </GridItem>
         </Grid>
 
-        <HStack h={'30rem'}>
-          <VStack h='100%'>
-            <FcCandleSticks size={30} />
-            <Fade
-              direction={'down'}
-              duration={'2000'}
-              style={{ height: '100%' }}
-            >
-              <Box
-                overflow={'hidden'}
-                rounded={'full'}
-                width='2px'
-                p='2px'
-                h='full'
-                bgGradient='linear(to-b, transparent, pink.500)'
-              >
-                <div></div>
+        <Grid
+          //   h='800'
+          mt={20}
+          w={'full'}
+          templateRows='repeat(1, 1fr)'
+          templateColumns='repeat(17, 1fr)'
+          gap={1}
+        >
+          <GridItem rowSpan={1} colSpan={1} h='full'>
+            <Center direction={'column'} h='full'>
+              <VStack h='full'>
+                <FcCandleSticks size={30} />
+                <Fade
+                  direction={'down'}
+                  duration={'2000'}
+                  style={{ height: '100%' }}
+                >
+                  <Box
+                    overflow={'hidden'}
+                    rounded={'full'}
+                    width='2px'
+                    p='2px'
+                    h='full'
+                    bgGradient='linear(to-b, transparent, pink.500)'
+                  >
+                    <div></div>
+                  </Box>
+                </Fade>
+              </VStack>
+            </Center>
+          </GridItem>
+          <GridItem
+            transition={'linear 2s'}
+            colSpan={16}
+            // overflow={'scroll'}
+            paddingRight={7}
+          >
+            <Heading mt={10} zIndex={1} position={'relative'}>
+              Eksekusi autotrade dari signal
+            </Heading>
+            <Text mb={5} position={'relative'} zIndex={1} fontFamily={'monospace'}>Eksekusi trade dengan otomatis tanpa <i>mantengin</i> layar</Text>
+            <Slide cascade={true}>
+              <Box width={{ base: '100%', xl: '80%' }}>
+                <GlowingImage
+                  src={'https://public.bnbstatic.com/image/cms/article/body/202107/77dff25762eae3e8f92e42c9d9ae0da5.png'}
+                  alt={'pine'}
+                  bg={'linear-gradient(45deg, #8C52FF, #00205E)'}
+                />
               </Box>
-            </Fade>
-          </VStack>
-          <Box width={'50%'}>
-            <GlowingImage src={'/backtest.jpeg'} alt={'pine'} />
-          </Box>
-        </HStack>
+            </Slide>
+          </GridItem>
+        </Grid>
 
-        <Box my={500}>
-          <Center my={20}>
-            <Heading>ALGORITHMIC TRADER PATHWAY</Heading>
-          </Center>
+        <Box my={200}>
           <Fade style={{ display: 'flex', justifyContent: 'center' }}>
+            <Center my={20}>
+              <Heading>ALGORITHMIC TRADER PATHWAY</Heading>
+            </Center>
             <Box width={{ base: '100%', lg: '80%' }}>
               <GlowingImage
                 src={'/pathway.jpg'}

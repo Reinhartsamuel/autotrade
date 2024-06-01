@@ -24,10 +24,10 @@ const GlowingImageRoot = styled.div`
     transform: scale(0.98);
   }
 `;
-function GlowingImage({ src, alt, bg }) {
+function GlowingImage({ src, alt, bg, width }) {
   return (
     <GlowingImageRoot src={src} bg={bg}>
-      <Image src={src} alt={alt} border={'2px'} borderColor={'gray.600'}/>
+      <Image w={width} src={src} alt={alt} border={'2px'} borderColor={'gray.600'}/>
     </GlowingImageRoot>
   );
 }
