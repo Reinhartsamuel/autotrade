@@ -103,21 +103,26 @@ export default function Home() {
           <Image borderRadius={'30'} w={'full'} aria-label='trading' src={'/signal1.png'} alt={'ss'}/>
         </Flex>
       </Stack>
-      <Stack p={{ base: 10, lg: 30 }} minH={'100vh'} position={'relative'}>
+      <Stack position={'relative'}>
 
-        <SimpleGrid columns={{base:1, lg:2}}alignItems={'center'}>
-          <Heading>
-            Trading plan kamu sendiri, tanpa screening berjam-jam atau tarik
-            garis{' '}
-            <Heading
-              bgGradient='linear(to-r, yellow.400, red.500)'
-              bgClip='text'
-            >
-              signal trading langsung dari pinescript
+        <SimpleGrid p={5} columns={{base:1, lg:2}}>
+          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <Heading>
+              Trading plan kamu sendiri, tanpa screening berjam-jam atau tarik
+              garis{' '}
+              <Text
+                bgGradient='linear(to-r, yellow.400, red.500)'
+                bgClip='text'
+              >
+                signal trading langsung dari pinescript
+              </Text>
             </Heading>
-          </Heading>
-          <CarouselComponent />
+          </Box>
+          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <CarouselComponent />
+          </Box>
         </SimpleGrid>
+        
       <Box
           zIndex={-1}
           w={{ base: 300, sm: 400, md: 500, lg: 800 }}

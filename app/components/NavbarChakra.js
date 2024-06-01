@@ -71,8 +71,8 @@ export default function NavbarChakra() {
 
   return (
     <>
-      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller'>
-        <Flex zIndex={2} h={16} alignItems={"center"} justifyContent={"space-between"} position={'relative'}>
+      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller' >
+        <Flex zIndex={2} h={16} alignItems={"center"} justifyContent={"space-between"} position={'relative'} px={5}>
           <IconButton
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
