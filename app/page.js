@@ -73,8 +73,7 @@ export default function Home() {
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-              Bantu kamu <o>traders</o> untuk trading tanpa
-              <strong>di-backtesting</strong>
+              Bantu kamu <o>traders</o> untuk trading secara otomatis dengan <i>script</i>
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Link href={'#pricing'}>

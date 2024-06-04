@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import {
   Box,
   Stack,
@@ -11,13 +11,13 @@ import {
   ListItem,
   ListIcon,
   Button,
-} from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import { FaCheckCircle } from "react-icons/fa";
-import { priceFormat } from "../utils/priceFormat";
+} from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+import { FaCheckCircle } from 'react-icons/fa';
+import { priceFormat } from '../utils/priceFormat';
 import { cache, useEffect, useState } from 'react';
 import { collection, getDocs, query, where, sortBy, orderBy } from 'firebase/firestore';
-import { db } from '../config/firebase';
+import { authFirebase, db } from '../config/firebase';
 
 function PriceWrapper({ children }) {
   return (
@@ -26,9 +26,9 @@ function PriceWrapper({ children }) {
       shadow='base'
       borderWidth='1px'
       maxW={400}
-      alignSelf={{ base: "center", lg: "flex-start" }}
-      borderColor={useColorModeValue("gray.200", "gray.500")}
-      borderRadius={"xl"}
+      alignSelf={{ base: 'center', lg: 'flex-start' }}
+      borderColor={useColorModeValue('gray.200', 'gray.500')}
+      borderRadius={'xl'}
     >
       {children}
     </Box>
@@ -38,6 +38,7 @@ function PriceWrapper({ children }) {
 export default function PricingComponent() {
   const router = useRouter();
   const [prices, setPrices] = useState([]);
+  const [loading, setLoading] = useState(false);
   const getPricing = cache(async () => {
     try {
       const arr = [];
@@ -55,6 +56,19 @@ export default function PricingComponent() {
     }
   })
 
+
+  const handleCheckout = async (x) => {
+    setLoading(true)
+    try {
+      if (authFirebase.currentUser) {
+        router.push(`/checkout/?plan=${x?.name}&id=${x?.id}`)
+      } else {
+        router.push('/auth/login')
+      }
+    } catch (error) { throw new Error(error.message) }
+     finally { setLoading(false) }
+  }
+
   useEffect(() => {
     getPricing()
   } ,[])
@@ -64,17 +78,17 @@ export default function PricingComponent() {
         <Heading as='h1' fontSize='4xl'>
           Pilih Plan
         </Heading>
-        <Text fontSize='lg' color={"gray.500"}>
+        <Text fontSize='lg' color={'gray.500'}>
           Bayar dengan kartu kredit, Gopay, atau transfer bank
         </Text>
       </VStack>
       <Stack
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: 'column', md: 'row' }}
         textAlign='center'
         justify='center'
         spacing={{ base: 4, lg: 10 }}
         py={10}
-        overflow={"auto"}
+        overflow={'auto'}
       >
         {prices?.map((x, i) => (
           <PriceWrapper key={i}>
@@ -83,14 +97,14 @@ export default function PricingComponent() {
                 position='absolute'
                 top='-16px'
                 left='50%'
-                style={{ transform: "translate(-50%)" }}
+                style={{ transform: 'translate(-50%)' }}
               >
                 <Text
                   textTransform='uppercase'
-                  bg={useColorModeValue("red.300", "red.700")}
+                  bg={useColorModeValue('red.300', 'red.700')}
                   px={3}
                   py={1}
-                  color={useColorModeValue("gray.900", "gray.300")}
+                  color={useColorModeValue('gray.900', 'gray.300')}
                   fontSize='sm'
                   fontWeight='600'
                   rounded='xl'
@@ -117,9 +131,9 @@ export default function PricingComponent() {
                 </HStack>
               </Box>
               <VStack
-                // bg={useColorModeValue("gray.50", "gray.700")}
+                // bg={useColorModeValue('gray.50', 'gray.700')}
                 py={4}
-                borderBottomRadius={"xl"}
+                borderBottomRadius={'xl'}
               >
                 <List spacing={3} textAlign='start' px={12}>
                   {x.features.map((y, idx) => (
@@ -133,12 +147,15 @@ export default function PricingComponent() {
                   <Button
                     w='full'
                     // colorScheme='red'
-                    bgGradient={"linear(to-l,#5DE1E6,#00205E)"}
+                    bgGradient={x?.popular? 'linear(to-l,#5DE1E6,#00205E)' : ''}
                     _hover={{
-                      bgGradient: "linear(to-l,#8C52FF,#031B4B)",
+                      bgGradient: 'linear(to-l,#8C52FF,#031B4B)',
                     }}
-                    // variant={x?.popular ? 'solid' : 'outline'}
-                    onClick={() => router.push(`/checkout/?plan=${x?.name}&id=${x?.id}`)}
+                    variant={x?.popular ? 'solid' : 'outline'}
+                    onClick={() => handleCheckout(x)}
+                    isLoading={loading}
+                    isDisabled={loading}
+                    loadingText={'Processing...'}
                   >
                     Daftar
                   </Button>

@@ -12,9 +12,10 @@ import {
 } from '@chakra-ui/react';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { authFirebase, db } from '../../config/firebase'
 import { doc, setDoc } from 'firebase/firestore/lite';
+import { FcGoogle } from 'react-icons/fc';
 
 const provider = new GoogleAuthProvider();
 
@@ -94,6 +95,11 @@ export default function LoginPage() {
     // }
   };
   
+  useEffect(() => {
+    if (authFirebase.currentUser) {
+      router.push('/')
+    }
+  },[])
   
   return (
     <Flex
@@ -103,9 +109,9 @@ export default function LoginPage() {
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
+          <Heading fontSize={'4xl'}>Buat akun byScript</Heading>
+          <Text fontSize={'lg'} color={'gray.500'} textAlign={'center'}>
+            Jika kamu sudah punya <i>subscription</i> byScript, pastikan login dengan email yang sama
           </Text>
         </Stack>
         <Box
@@ -115,7 +121,12 @@ export default function LoginPage() {
           p={8}>
           <Stack spacing={4}>
             <Stack spacing={10}>
-              <Button isLoading={loading} onClick={handleLoginGoogle}>Continue With Google</Button>
+              <Button isLoading={loading} onClick={handleLoginGoogle} variant={'outline'}>
+                <Box mx={2}>
+                  <FcGoogle size={20}/>
+                </Box>
+                Continue With Google
+              </Button>
             </Stack>
           </Stack>
         </Box>

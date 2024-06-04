@@ -7,7 +7,7 @@ const page = async ({params}) => {
     <>
       <Stack
         w={"100vw"}
-        minH={['80vh','100vh']}
+        minH={['100vh','100vh']}
         alignItems={"center"}
         justifyContent={"center"}
       >

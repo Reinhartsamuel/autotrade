@@ -102,7 +102,7 @@ export default function FeatureComponent () {
                 </Text>
               </Heading>
               <Text color={"gray.500"} fontSize={{ base: "sm", sm: "md" }}>
-                Selesaikan pesanan anda, lalu tim kami akan menghubungi
+                Selesaikan pesanan anda, atur onboarding meeting dengan tim kami, dan langsung trading otomatis byScript
               </Text>
             </Stack>
             <Box as={"form"} mt={5}>

@@ -15,7 +15,7 @@ import {
   Badge,
   Button, 
 } from "@chakra-ui/react";
-import { collection, getDocs, query, where } from "firebase/firestore/lite";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { authFirebase, db } from "../config/firebase";
 import { onAuthStateChanged } from 'firebase/auth';

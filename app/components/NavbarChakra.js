@@ -26,8 +26,9 @@ const Links = [
   { name: "Home", link: "/" },
   { name: "Pricing", link: "#pricing" },
   { name: "Events", link: "event" },
-  { name: "Subscription", link: "subscription" },
-  { name: "Akademi", link: "academy" },
+  { name: "Subscription", link: "subscriptions" },
+  { name: "Marketplace", link: "marketplace" },
+  { name: "Affiliate", link: "affiliate" },
 ];
 
 const NavLink = ({ children }) => (
@@ -102,7 +103,7 @@ export default function NavbarChakra() {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link, i) => (
-                <NavLink key={i}>{link}</NavLink>
+                (authFirebase?.currentUser && link.link!== '#pricing') && <NavLink key={i}>{link}</NavLink>
               ))}
             </HStack>
           </HStack>
