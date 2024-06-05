@@ -148,7 +148,7 @@ const SummaryComponent = ({ params }) => {
 
   const handleUpdateOrder = async () => {
     try {
-      await updateDoc(doc(db, 'orders', params.orderId), { transferReceipt: imageUrl });
+      await updateDoc(doc(db, 'orders', params.orderId), { transferReceipt: imageUrl, paymentStatus:'WAITING FOR CONFIRMATION' });
       toast({status : 'success', description : 'Bukti bayar berhasil diupload', title : 'Sukses',isClosable:true, duration : 2000, position : 'top'})
       onClose()
       router.push('/orders')

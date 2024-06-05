@@ -4,7 +4,7 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
+  // Link,
   IconButton,
   Button,
   Menu,
@@ -21,6 +21,7 @@ import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { authFirebase } from "../config/firebase";
+import Link from 'next/link';
 
 const Links = [
   { name: "Home", link: "/" },
@@ -32,7 +33,7 @@ const Links = [
 ];
 
 const NavLink = ({ children }) => (
-  <Link
+  <Box
     px={2}
     py={1}
     rounded={"md"}
@@ -40,10 +41,9 @@ const NavLink = ({ children }) => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={children?.link}
   >
-    {children?.name}
-  </Link>
+    <Link href={children?.link} replace>{children?.name}</Link>
+  </Box>
 );
 
 export default function NavbarChakra() {
@@ -103,7 +103,7 @@ export default function NavbarChakra() {
               display={{ base: "none", md: "flex" }}
             >
               {Links.map((link, i) => (
-                (authFirebase?.currentUser && link.link!== '#pricing') && <NavLink key={i}>{link}</NavLink>
+                <NavLink key={i}>{link}</NavLink>
               ))}
             </HStack>
           </HStack>

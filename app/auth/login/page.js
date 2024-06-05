@@ -34,6 +34,7 @@ export default function LoginPage() {
         const user = result.user;
         console.log(user);
         // navigate("/employee/dashboard");
+        router.push('/')
         try {
           fetch('/api/email/login',{
             method: "post",
@@ -94,12 +95,6 @@ export default function LoginPage() {
     //   console.log(error.message);
     // }
   };
-  
-  useEffect(() => {
-    if (authFirebase.currentUser) {
-      router.push('/')
-    }
-  },[])
   
   return (
     <Flex
