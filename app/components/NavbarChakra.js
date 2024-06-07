@@ -26,7 +26,7 @@ import Link from 'next/link';
 const Links = [
   { name: "Home", link: "/" },
   { name: "Pricing", link: "#pricing" },
-  { name: "Events", link: "/event" },
+  // { name: "Events", link: "/event" },
   { name: "Subscription", link: "/subscriptions" },
   { name: "Marketplace", link: "/marketplace" },
   { name: "Affiliate", link: "/affiliate" },
