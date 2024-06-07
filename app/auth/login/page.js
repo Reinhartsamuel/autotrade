@@ -49,14 +49,17 @@ export default function LoginPage() {
         } catch (error) {
           
         }
-        setDoc(doc(db, "users", user.uid), {
+        const isNewUser = result.additionalUserInfo.isNewUser;
+        const dataNew = {
           name: user?.displayName || "",
           lastLogin : new Date(),
           email : user?.email || "",
           photoUrl : user?.photoURL || "",
           token,
           country: "Indonesia"
-        });
+        };
+        if (isNewUser) dataNew.createdAt = new Date();
+        setDoc(doc(db, "users", user.uid), dataNew);
         toast({status  : 'success', title : `Selamat datang, ${user?.displayName || user?.email}`, duration : 3000, isClosable : true})
         router.push('/')
 

@@ -4,6 +4,8 @@ import {
   Button,
   Center,
   Flex,
+  Grid,
+  GridItem,
   HStack,
   Heading,
   Image,
@@ -73,7 +75,8 @@ export default function Home() {
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-              Bantu kamu <o>traders</o> untuk trading secara otomatis dengan <i>script</i>
+              Bantu kamu <o>traders</o> untuk trading secara otomatis dengan{' '}
+              <i>script</i>
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Link href={'#pricing'}>
@@ -99,7 +102,13 @@ export default function Home() {
         </Flex>
         <Flex flex={1} alignItems={'center'} p={8}>
           {/* <VIdeoComponent1 /> */}
-          <Image borderRadius={'30'} w={'full'} aria-label='trading' src={'/signal1.png'} alt={'ss'}/>
+          <Image
+            borderRadius={'30'}
+            w={'full'}
+            aria-label='trading'
+            src={'/signal1.png'}
+            alt={'ss'}
+          />
         </Flex>
       </Stack>
       <Stack position={'relative'}>
@@ -142,8 +151,15 @@ export default function Home() {
         justifyContent={'center'}
       >
         <Center>
-          <Heading>Seberapa jauh <i>journey</i> trading-mu?</Heading>
-        </Center><SimpleGrid columns={{base:1, lg:2}} gap={{base:2,xl:10}} position={'relative'}>
+          <Heading>
+            Seberapa jauh <i>journey</i> trading-mu?
+          </Heading>
+        </Center>
+        <SimpleGrid
+          columns={{ base: 1, lg: 2 }}
+          gap={{ base: 2, xl: 10 }}
+          position={'relative'}
+        >
           <Box
             zIndex={-1}
             w={{ base: 300, md: 500, lg: 800 }}
@@ -181,8 +197,6 @@ export default function Home() {
           alt={'pine'}
         />
       </Stack>
-      
-
 
       <Stack
         mt={30}
@@ -192,9 +206,15 @@ export default function Home() {
         justifyContent={'center'}
       >
         <Center>
-          <Heading textAlign={'center'}>Sudah Punya Trading Plan Kamu Sendiri?</Heading>
+          <Heading textAlign={'center'}>
+            Sudah Punya Trading Plan Kamu Sendiri?
+          </Heading>
         </Center>
-        <SimpleGrid columns={{base:1, lg:2}} gap={{base:2,xl:10}} position={'relative'}>
+        <SimpleGrid
+          columns={{ base: 1, lg: 2 }}
+          gap={{ base: 2, xl: 10 }}
+          position={'relative'}
+        >
           <Box
             zIndex={-1}
             w={{ base: 300, md: 500, lg: 800 }}

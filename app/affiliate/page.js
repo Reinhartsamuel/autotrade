@@ -5,10 +5,8 @@ const page = () => {
   return (
     <>
       <Stack w={'100vw'} minH={'100vh'}>
-        <Container maxW={'5xl'} pt={{ base: 100, lg: '8%' }}>
-          <Heading>Affiliate</Heading>
-          <Text>Tidak ada data</Text>
-        </Container>
+        <Heading>Affiliate</Heading>
+        <Text>Tidak ada data</Text>
       </Stack>
     </>
   );

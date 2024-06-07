@@ -19,28 +19,21 @@ const settings = {
   slidesToScroll: 1,
 };
 
-export default function CarouselComponent({cardsx, arrowButton}) {
-  // As we have used custom buttons, we need a reference variable to
-  // change the state
+const defaultCards = [
+  '/signal1.png',
+  '/signal2.jpg',
+  '/signal3.jpg',
+  '/signal4.jpg',
+]
+
+export default function CarouselComponent({cards = defaultCards}) {
   const [slider, setSlider] = React.useState(null);
 
-  // These are the breakpoints which changes the position of the
-  // buttons as the screen size changes
-  const top = useBreakpointValue({ base: '90%', md: '50%' });
-  const side = useBreakpointValue({ base: '30%', md: '10px' });
-
   // These are the images used in the slide
-  const cards = [
-    '/signal1.png',
-    '/signal2.jpg',
-    '/signal3.jpg',
-    '/signal4.jpg',
-  ];
-
   return (
     <Box
       position={'relative'}
-      height={'600px'}
+      height={{base:'200',xl:'600px'}}
       width={'full'}
       overflow={'hidden'}>
       {/* CSS files for react-slick */}

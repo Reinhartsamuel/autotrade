@@ -23,6 +23,7 @@ function PriceWrapper({ children }) {
   return (
     <Box
       mb={4}
+      mx={{base:'5%', sm:0,md:0, lg:0}}
       shadow='base'
       borderWidth='1px'
       maxW={400}
@@ -55,8 +56,6 @@ export default function PricingComponent() {
       console.log(error.message);
     }
   })
-
-
   const handleCheckout = async (x) => {
     setLoading(true)
     try {
@@ -68,7 +67,6 @@ export default function PricingComponent() {
     } catch (error) { throw new Error(error.message) }
      finally { setLoading(false) }
   }
-
   useEffect(() => {
     getPricing()
   } ,[])
@@ -79,11 +77,11 @@ export default function PricingComponent() {
           Pilih Plan
         </Heading>
         <Text fontSize='lg' color={'gray.500'}>
-          Bayar dengan kartu kredit, Gopay, atau transfer bank
+          Subscription per tahun harga lebih murah
         </Text>
       </VStack>
       <Stack
-        direction={{ base: 'column', md: 'row' }}
+        direction={{ base: 'column', sm: 'row' }}
         textAlign='center'
         justify='center'
         spacing={{ base: 4, lg: 10 }}

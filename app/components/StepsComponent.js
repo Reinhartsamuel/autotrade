@@ -66,6 +66,23 @@ const StepsComponent = () => {
         my={20}
         bgGradient={'linear(to-b, transparent, gray.800)'}
       >
+        <Flex
+          minH={'100vh'}
+          w={'full'}
+          flexDir={'row'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          p={10}
+        >
+          <Fade delay={200} duration={2000}>
+            <Stack alignItems={'center'}>
+              <Heading size={'4xl'}>Bagaimana caranya?</Heading>
+              <Text fontSize={20} fontWeight={'bold'} bgGradient={'linear(to-r, #8C52FF, #5DE1E6)'} bgClip={'text'}>
+                <i>"Every Trade is Made byScript"</i>
+              </Text>
+            </Stack>
+          </Fade>
+        </Flex>
         <Grid
           //   h='800'
           mt={20}
@@ -104,7 +121,9 @@ const StepsComponent = () => {
             paddingRight={7}
           >
             <Heading>Pilih Indikator Favoritmu</Heading>
-            <Text fontFamily={'monospace'}>Pilih indikator yang ingin kamu gunakan</Text>
+            <Text fontFamily={'monospace'}>
+              Pilih indikator yang ingin kamu gunakan
+            </Text>
             <Slide cascade={true}>
               <SimpleGrid columns={{ base: 2, lg: 3 }} gap={1}>
                 {indicators.map((x, i) => (
@@ -171,10 +190,17 @@ const StepsComponent = () => {
             // overflow={'scroll'}
             paddingRight={7}
           >
-            <Heading mt={10}  zIndex={1} position={'relative'}>
+            <Heading mt={10} zIndex={1} position={'relative'}>
               Coding Algoritma
             </Heading>
-            <Text mb={5} position={'relative'} zIndex={1} fontFamily={'monospace'}><i>Coding</i> di dalam pinescript editor</Text>
+            <Text
+              mb={5}
+              position={'relative'}
+              zIndex={1}
+              fontFamily={'monospace'}
+            >
+              <i>Coding</i> di dalam pinescript editor
+            </Text>
             <Slide cascade={true}>
               <Box width={{ base: '100%', xl: '80%' }}>
                 <GlowingImage
@@ -223,10 +249,18 @@ const StepsComponent = () => {
             // overflow={'scroll'}
             paddingRight={7}
           >
-            <Heading mt={10}  zIndex={1} position={'relative'}>
+            <Heading mt={10} zIndex={1} position={'relative'}>
               Backtesting
             </Heading>
-            <Text mb={5} position={'relative'} zIndex={1} fontFamily={'monospace'}>Test algoritma trading plan kamu dengan melihat histori harga coin sampai 10 tahun ke belakang</Text>
+            <Text
+              mb={5}
+              position={'relative'}
+              zIndex={1}
+              fontFamily={'monospace'}
+            >
+              Test algoritma trading plan kamu dengan melihat histori harga coin
+              sampai 10 tahun ke belakang
+            </Text>
             <Slide cascade={true}>
               <Box width={{ base: '100%', xl: '80%' }}>
                 <GlowingImage
@@ -279,11 +313,20 @@ const StepsComponent = () => {
             <Heading mt={10} zIndex={1} position={'relative'}>
               Eksekusi autotrade dari signal
             </Heading>
-            <Text mb={5} position={'relative'} zIndex={1} fontFamily={'monospace'}>Eksekusi trade dengan otomatis tanpa <i>mantengin</i> layar</Text>
+            <Text
+              mb={5}
+              position={'relative'}
+              zIndex={1}
+              fontFamily={'monospace'}
+            >
+              Eksekusi trade dengan otomatis tanpa <i>mantengin</i> layar
+            </Text>
             <Slide cascade={true}>
               <Box width={{ base: '100%', xl: '80%' }}>
                 <GlowingImage
-                  src={'https://public.bnbstatic.com/image/cms/article/body/202107/77dff25762eae3e8f92e42c9d9ae0da5.png'}
+                  src={
+                    'https://public.bnbstatic.com/image/cms/article/body/202107/77dff25762eae3e8f92e42c9d9ae0da5.png'
+                  }
                   alt={'pine'}
                   bg={'linear-gradient(45deg, #8C52FF, #00205E)'}
                 />

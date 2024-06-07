@@ -18,7 +18,7 @@ const GlowingImageRoot = styled.div`
     filter: blur(3rem) saturate(3);
   }
   > img {
-    width: 100%;
+    width: 110%;
     object-fit: cover;
     border-radius: inherit;
     transform: scale(0.98);
