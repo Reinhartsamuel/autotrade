@@ -26,10 +26,10 @@ import Link from 'next/link';
 const Links = [
   { name: "Home", link: "/" },
   { name: "Pricing", link: "#pricing" },
-  { name: "Events", link: "event" },
-  { name: "Subscription", link: "subscriptions" },
-  { name: "Marketplace", link: "marketplace" },
-  { name: "Affiliate", link: "affiliate" },
+  { name: "Events", link: "/event" },
+  { name: "Subscription", link: "/subscriptions" },
+  { name: "Marketplace", link: "/marketplace" },
+  { name: "Affiliate", link: "/affiliate" },
 ];
 
 const NavLink = ({ children }) => (
@@ -145,7 +145,7 @@ export default function NavbarChakra() {
 
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
+            <Stack as={"nav"} spacing={4} bg='gray.800'>
               {Links.map((link, i) => (
                 <NavLink key={i}>{link}</NavLink>
               ))}
