@@ -17,6 +17,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import { FaRegCopy } from 'react-icons/fa';
+import { authFirebase } from '../config/firebase';
 
 const page = () => {
   return (
@@ -110,13 +111,13 @@ const page = () => {
                     <Stack>
                       <Heading>30%</Heading>
                       <Text fontSize={12} color={'gray.699'}>
-                        Layer Pertama
+                        First Referees
                       </Text>
                     </Stack>
-                    <Stack>
+                    <Stack> 
                       <Heading>10%</Heading>
                       <Text fontSize={12} color={'gray.699'}>
-                        Layer Kedua
+                        Second Referees
                       </Text>
                     </Stack>
                   </Flex>
@@ -127,7 +128,7 @@ const page = () => {
                     <Input
                       textColor={'gray.600'}
                       borderColor={'gray.200'}
-                      value={'313o13hi12837681b39'}
+                      value={authFirebase.currentUser.uid}
                     />
                     <InputRightElement cursor={'pointer'}>
                       <Box

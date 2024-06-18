@@ -53,6 +53,8 @@ export default function NavbarChakra() {
   const params = useSearchParams();
   const referralId = params.get('ref');
 
+  // console.log(paramsx, 'paramsx')
+
   const handleLogin = async () => {
     console.log(referralId);
     if (referralId) return router.push(`/auth/login?ref=${referralId}`);
@@ -80,7 +82,9 @@ export default function NavbarChakra() {
 
   return (
     <>
-      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller'>
+      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller'
+      display={window?.location?.href?.includes('auth' || 'onboarding') ? 'none' : 'block'}
+      >
         <Flex zIndex={2} h={16} alignItems={"center"} justifyContent={"space-between"} position={'relative'} px={5}>
           <IconButton
             size={"md"}
