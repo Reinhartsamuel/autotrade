@@ -2,9 +2,6 @@ import moment from 'moment';
 
 export async function POST(request) {
     const body = await request.json();
-    // const ipAddress = request.headers;
-    console.log(request.headers['x-forwarded-for'], 'request.headers[x-forwarded-for]');
-
     const htmlContent = `<!DOCTYPE html>
     <html lang='en'>
     <head>
@@ -19,12 +16,10 @@ export async function POST(request) {
         <div style='width:100%; display:flex; justify-content:center;align-items:center;'>
           <div style='display:table-row;flex-direction:column; justify-content:center;align-items:center;'>
           <h1 style='margin-bottom:50px'>Selamat datang di byScript.io!</h1>
-          <a href='https://byscript.io' style='display:flex; justify-content:center;align-items:center;'>
-            <img src='https://deoapp-bucket.s3.ap-southeast-1.amazonaws.com/folder/v1/xx/you!%20(1).png' alt='affiliate' width='100%' />
+          <a href='https://byscript.io/affililate' style='display:flex; justify-content:center;align-items:center;'>
           </a>
           <div style='margin-top:50px'>
-              Hai, <strong>${body?.name}</strong>, anda telah login ke byScript.io. Jelajahi lebih lanjut trading plan 
-            byScript, atau buat trading plan kamu sendiri untuk autotrade tanpa pikir pusing. HAPPY CUAN!!😇😇
+              Hai, <strong>${body?.name}</strong>, terima kasih sudah melakukan registrasi. Silakan isi OTP 021890
           </div>
         </div
       </div>
@@ -35,7 +30,7 @@ export async function POST(request) {
     const emailBody = {
     sender: {
       name: "byScript.io",
-      email:'edwinfardyanto@mgail.com'
+      email: "edwinfardyanto@gmail.com"
     },
     to: [
       {
@@ -43,7 +38,7 @@ export async function POST(request) {
         name: body?.name
       }
     ],
-    subject:"Kamu Telah Login di byScript",
+    subject:"Registrasi byScript",
     params : {
         LOGO_IMAGE_URL : "https://i.ibb.co.com/RB9rQy3/Whats-App-Image-2024-05-19-at-16-02-06.jpg"
     },

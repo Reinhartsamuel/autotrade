@@ -21,6 +21,7 @@ const firebaseConfig = {
 const firebaseConfigStaging = {
     apiKey: "AIzaSyDJt25hHsouxWKaGAwX5lRqCGtv4v2vr18",
     authDomain: "saudagar-staging.firebaseapp.com",
+    // authDomain: "byscript.io",
     projectId: "saudagar-staging",
     storageBucket: "saudagar-staging.appspot.com",
     messagingSenderId: "167715247415",

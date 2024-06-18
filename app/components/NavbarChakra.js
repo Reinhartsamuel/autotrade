@@ -18,7 +18,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { authFirebase } from "../config/firebase";
 import Link from 'next/link';
@@ -50,6 +50,14 @@ export default function NavbarChakra() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, setUser] = useState(authFirebase.currentUser);
   const router = useRouter();
+  const params = useSearchParams();
+  const referralId = params.get('ref');
+
+  const handleLogin = async () => {
+    console.log(referralId);
+    if (referralId) return router.push(`/auth/login?ref=${referralId}`);
+    router.push("/auth/login")
+  }
   const handleLogout = async () => {
     try {
       await authFirebase.signOut();
@@ -72,7 +80,7 @@ export default function NavbarChakra() {
 
   return (
     <>
-      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller' >
+      <Box position={'fixed'} w={'full'} zIndex={2} id='scroller'>
         <Flex zIndex={2} h={16} alignItems={"center"} justifyContent={"space-between"} position={'relative'} px={5}>
           <IconButton
             size={"md"}
@@ -83,7 +91,6 @@ export default function NavbarChakra() {
           />
           <HStack spacing={8} alignItems={"center"}>
             <Box
-              bg='red'
               overflow={"hidden"}
               borderRadius={10}
               transition='transform 0.2s'
@@ -133,7 +140,7 @@ export default function NavbarChakra() {
                 </Menu>
               </>
             ) : (
-              <Button onClick={() => router.push("/auth/login")}  bgGradient={"linear(to-l,#8C52FF,#031B4B)"} _active={{
+              <Button onClick={handleLogin}  bgGradient={"linear(to-l,#8C52FF,#031B4B)"} _active={{
                 bg: "blue.700",
               }}>
                 Login

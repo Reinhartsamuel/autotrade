@@ -112,8 +112,10 @@ export default function Home() {
         </Flex>
       </Stack>
       <Stack position={'relative'}>
-
-        <SimpleGrid p={5} columns={{base:1, lg:2}}>
+        <SimpleGrid p={5} columns={{ base: 1, lg: 2 }} gap={10}>
+          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <CarouselComponent />
+          </Box>
           <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
             <Heading>
               Trading plan kamu sendiri, tanpa screening berjam-jam atau tarik
@@ -126,12 +128,9 @@ export default function Home() {
               </Text>
             </Heading>
           </Box>
-          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
-            <CarouselComponent />
-          </Box>
         </SimpleGrid>
-        
-      <Box
+
+        <Box
           zIndex={-1}
           w={{ base: 300, sm: 400, md: 500, lg: 800 }}
           h={{ base: 300, sm: 400, md: 500, lg: 800 }}

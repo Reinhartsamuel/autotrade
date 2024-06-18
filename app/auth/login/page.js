@@ -1,21 +1,24 @@
-'use client'
+'use client';
 import {
   Flex,
   Box,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
   useColorModeValue,
   useToast,
+  Spinner,
 } from '@chakra-ui/react';
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { authFirebase, db } from '../../config/firebase'
-import { doc, setDoc } from 'firebase/firestore/lite';
+import { useState } from 'react';
+import { authFirebase, db } from '../../config/firebase';
 import { FcGoogle } from 'react-icons/fc';
+import {
+  getCollectionFirebase,
+  setDocumentFirebase,
+} from '../../utils/firebaseApi';
 
 const provider = new GoogleAuthProvider();
 
@@ -25,110 +28,113 @@ export default function LoginPage() {
   const toast = useToast();
 
   const handleLoginGoogle = async () => {
-    signInWithPopup(authFirebase, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-        // navigate("/employee/dashboard");
-        router.push('/')
-        try {
-          fetch('/api/email/login',{
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body : JSON.stringify({
-              name : user?.displayName || user?.email || '',
-              email : user?.email
-            })
-          })
-        } catch (error) {
-          
-        }
-        const isNewUser = result.additionalUserInfo.isNewUser;
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(authFirebase, provider);
+      // console.log(result, 'result');
+      const user = result.user;
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // console.log(token, 'token');
+      // console.log('fetching user with email ', result?.user?.email);
+      const findUser = await getCollectionFirebase('users', [
+        { field: 'email', operator: '==', value: result?.user?.email },
+      ]);
+      const isNewUser = findUser.length === 0;
+      console.log(isNewUser, 'isNewUser');
+      console.log(findUser, 'findUser');
+
+      try {
         const dataNew = {
-          name: user?.displayName || "",
-          lastLogin : new Date(),
-          email : user?.email || "",
-          photoUrl : user?.photoURL || "",
+          name: user?.displayName || '',
+          lastLogin: new Date(),
+          email: user?.email || '',
+          photoUrl: user?.photoURL || '',
           token,
-          country: "Indonesia"
+          country: 'Indonesia',
         };
         if (isNewUser) dataNew.createdAt = new Date();
-        setDoc(doc(db, "users", user.uid), dataNew);
-        toast({status  : 'success', title : `Selamat datang, ${user?.displayName || user?.email}`, duration : 3000, isClosable : true})
-        router.push('/')
+        console.log(dataNew, 'dataNew');
+        await setDocumentFirebase('users', user.uid, dataNew);
+      } catch (error) {
+        console.log(error.message, 'error setdoc users');
+      }
 
-        if (user) {
-          setUserCredential(user);
-          localStorage.setItem("userGoogleCredential", JSON.stringify(user));
-        }
-        
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-    // signInWithRedirect(authFirebase, provider);
-    // try {
-    //   const uploadedData = await setDoc(
-    //     doc(db, "users", userCredential.uid),
-    //     {
-    //       name: userCredential.displayName,
-    //       email: userCredential.email,
-    //       uid_user: userCredential.uid,
-    //       role: "employee",
-    //       enrollmentDate: moment().format("MMMM Do YYYY, h:mm:ss a"),
-    //       createdAt: new Date(),
-    //     },
-    //     { merge: true }
-    //   );
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+      try {
+        fetch(isNewUser ? '/api/email/login/new-user' : '/api/email/login', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: user?.displayName || user?.email || '',
+            email: user?.email,
+          }),
+        });
+      } catch (error) {
+        console.log(error.message, 'error send emailemail');
+      }
+
+      if (isNewUser) {
+        router.push('/onboarding');
+      } else {
+        router.push('/subscriptions');
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
-  
   return (
     <Flex
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Buat akun byScript</Heading>
-          <Text fontSize={'lg'} color={'gray.500'} textAlign={'center'}>
-            Jika kamu sudah punya <i>subscription</i> byScript, pastikan login dengan email yang sama
-          </Text>
-        </Stack>
-        <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
-          <Stack spacing={4}>
-            <Stack spacing={10}>
-              <Button isLoading={loading} onClick={handleLoginGoogle} variant={'outline'}>
-                <Box mx={2}>
-                  <FcGoogle size={20}/>
-                </Box>
-                Continue With Google
-              </Button>
-            </Stack>
+      bg={useColorModeValue('gray.50', 'gray.800')}
+    >
+      {!loading ? (
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+          <Stack align={'center'}>
+            <Heading fontSize={'4xl'}>Buat akun byScript</Heading>
+            <Text fontSize={'lg'} color={'gray.500'} textAlign={'center'}>
+              Jika kamu sudah punya <i>subscription</i> byScript, pastikan login
+              dengan email yang sama
+            </Text>
           </Stack>
-        </Box>
-      </Stack>
+          <Box
+            rounded={'lg'}
+            bg={useColorModeValue('white', 'gray.700')}
+            boxShadow={'lg'}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <Stack spacing={10}>
+                <Button
+                  isLoading={loading}
+                  onClick={handleLoginGoogle}
+                  variant={'outline'}
+                >
+                  <Box mx={2}>
+                    <FcGoogle size={20} />
+                  </Box>
+                  Continue With Google
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
+        </Stack>
+      ) : (
+        <Stack
+          dir={'column'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          w={'full'}
+        >
+          <Text>Loading...</Text>
+          <Spinner />
+        </Stack>
+      )}
     </Flex>
   );
 }

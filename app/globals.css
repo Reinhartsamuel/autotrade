@@ -71,3 +71,7 @@ html {
   filter: blur(10px);
   z-index: -1;
 }
+
+.eco-coding {
+  font-family: 'EcoCodingWGL4';
+}

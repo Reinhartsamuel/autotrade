@@ -8,7 +8,7 @@ const GlowingImageRoot = styled.div`
     content: '';
     position: absolute;
     inset: 0;
-    background:${({ bg }) => `${bg ||'linear-gradient(0deg, transparent, yellow)'}`};
+    background:${({ backgroundColor }) => `${backgroundColor ||'linear-gradient(0deg, transparent, yellow)'}`};
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -26,7 +26,7 @@ const GlowingImageRoot = styled.div`
 `;
 function GlowingImage({ src, alt, bg, width }) {
   return (
-    <GlowingImageRoot src={src} bg={bg}>
+    <GlowingImageRoot src={src} backgroundColor={bg}>
       <Image w={width} src={src} alt={alt} border={'2px'} borderColor={'gray.600'}/>
     </GlowingImageRoot>
   );

@@ -1,11 +1,16 @@
-import { Container, Heading, Stack, Text } from '@chakra-ui/react';
+import {
+  Button,
+  Container,
+  Heading,
+  Link,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import React from 'react';
 
-
-
 const tradingPlans = [
-  {name : '', ownerName : 'Reinhart', subscribers : 20, level : 'rookie'}
-]
+  { name: '', ownerName: 'Reinhart', subscribers: 20, level: 'rookie' },
+];
 
 const page = () => {
   return (
@@ -15,6 +20,9 @@ const page = () => {
           <Stack>
             <Heading>Subscription Aktif</Heading>
             <Text>Tidak ada subscription</Text>
+            <Link href={'/marketplace'}>
+              <Button>Marketplace {'->'}</Button>
+            </Link>
           </Stack>
           <Stack mt={10}>
             <Heading>Trading Plan</Heading>

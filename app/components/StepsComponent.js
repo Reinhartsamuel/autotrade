@@ -76,9 +76,9 @@ const StepsComponent = () => {
         >
           <Fade delay={200} duration={2000}>
             <Stack alignItems={'center'}>
-              <Heading size={'4xl'}>Bagaimana caranya?</Heading>
-              <Text fontSize={20} fontWeight={'bold'} bgGradient={'linear(to-r, #8C52FF, #5DE1E6)'} bgClip={'text'}>
-                <i>"Every Trade is Made byScript"</i>
+              <Heading textAlign={'center'} size={'4xl'}>Bagaimana caranya?</Heading>
+              <Text fontSize={20} fontWeight={'bold'} bgGradient={'linear(to-r, #8C52FF, #5DE1E6)'} bgClip={'text'} className={'eco-coding'}>
+                "Every Trade is Made byScript"
               </Text>
             </Stack>
           </Fade>
@@ -127,7 +127,7 @@ const StepsComponent = () => {
             <Slide cascade={true}>
               <SimpleGrid columns={{ base: 2, lg: 3 }} gap={1}>
                 {indicators.map((x, i) => (
-                  <Box tra key={i} pos={'relative'} w={'200'} h={'199'}>
+                  <Box key={i} pos={'relative'} w={'200'} h={'199'}>
                     <Image
                       objectFit={'cover'}
                       src={x.url}
