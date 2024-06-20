@@ -128,7 +128,7 @@ const page = () => {
                     <Input
                       textColor={'gray.600'}
                       borderColor={'gray.200'}
-                      value={authFirebase.currentUser.uid}
+                      // value={authFirebase.currentUser.uid}
                     />
                     <InputRightElement cursor={'pointer'}>
                       <Box
