@@ -12,8 +12,12 @@ function loadCredentialsFromEnv() {
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
   const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
 
-  if (!clientId || !clientSecret || !refreshToken) {
-    throw new Error('Missing required environment variables for Google OAuth2 credentials.');
+  let error = [];
+  if (!clientId) error.push('Missing clientId');
+  if (!clientSecret) error.push('Missing clientSecret');
+  if (!refreshToken) error.push('Missing refreshToken');
+  if (error.length > 0) {
+    throw new Error(error.join('\n'));
   }
 
   const client = new google.auth.OAuth2(clientId, clientSecret);
