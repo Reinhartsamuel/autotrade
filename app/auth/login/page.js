@@ -18,7 +18,7 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { authFirebase, db } from '../../config/firebase';
 import { FcGoogle } from 'react-icons/fc';
@@ -33,6 +33,9 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const toast = useToast();
+  const searchParams = useSearchParams()
+ 
+  const affiliiateId = searchParams.get('aff')
 
   const handleLoginGoogle = async () => {
     setLoading(true);
@@ -141,6 +144,10 @@ export default function LoginPage() {
             p={8}
           >
             <Stack spacing={4}>
+              <Center>
+                <Heading size={'md'}>Refferal id</Heading>
+              </Center>
+              <Input placeholder={'Referral Code'} type={'text'} defaultValue={affiliiateId} />
               <Stack spacing={10}>
                 <Button
                   isLoading={loading}

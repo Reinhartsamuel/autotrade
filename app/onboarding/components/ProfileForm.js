@@ -53,7 +53,7 @@ const ProfileForm = ({ setIndex }) => {
           </Box>
           <Flex w={'full'} justifyContent={'space-between'} mt={10}>
             <Button onClick={() => setIndex(0)}>{'<-'} Kembali</Button>
-            <Button onClick={() => setIndex(2)}>Lanjutkan {'->'}</Button>
+            <Button onClick={() => setIndex(2)}>Lanjutkanx {'->'}</Button>
           </Flex>
         </Center>
       </Container>

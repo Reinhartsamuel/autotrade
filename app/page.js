@@ -36,12 +36,14 @@ export default function Home() {
       >
         <Box
           zIndex={-1}
-          w={{ base: 300, sm: 400, md: 500, lg: 800 }}
-          h={{ base: 300, sm: 400, md: 500, lg: 800 }}
+          w={{ base: 250, sm: 400, md: 500, lg: 800 }}
+          h={{ base: 250, sm: 400, md: 500, lg: 800 }}
           bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
           borderRadius={'full'}
-          filter={{ base: 'blur(50px)', md: 'blur(80px)', lg: 'blur(200px)' }}
-          style={{ transform: 'translateX(60%)' }}
+          filter={{ base: 'blur(40px)', md: 'blur(80px)', lg: 'blur(200px)' }}
+          saturate={200}
+          // style={{ transform: 'translateX(60%)' }}
+          transform={'translateX(60%)'}
           position={'absolute'}
         ></Box>
         {/* <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}> */}
@@ -79,21 +81,19 @@ export default function Home() {
               <i>script</i>
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-              <Link href={'#pricing'}>
-                <Button
-                  rounded={'full'}
-                  bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }}
-                  _active={{
-                    bg: 'blue.700',
-                  }}
-                >
-                  Mulai Sekarang
-                </Button>
-              </Link>
+              <Button
+                rounded={'full'}
+                bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                }}
+                _active={{
+                  bg: 'blue.700',
+                }}
+              >
+                <Link href={'new'}>Mulai Sekarang</Link>
+              </Button>
               <Button rounded={'full'} leftIcon={<FaPlay />}>
                 <Link href={'#'}>Gimana Cara Kerjanya?</Link>
               </Button>

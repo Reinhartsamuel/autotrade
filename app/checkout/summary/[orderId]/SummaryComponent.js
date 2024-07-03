@@ -131,7 +131,8 @@ const SummaryComponent = ({ params }) => {
 
   const handleUpload = async (compressedImg) => {
     try {
-      await uploadFileFirebase(compressedImg, setProgress, setImageUrl);
+      const url = await uploadFileFirebase(compressedImg, setProgress, setImageUrl);
+      console.log('url:::', url)
     } catch (error) {
       console.error(error.message);
       toast({
