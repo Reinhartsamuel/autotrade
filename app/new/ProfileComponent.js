@@ -92,7 +92,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                 />
               </Box>
               <Box>
-                <Text>Nomor Telepon (WA)</Text>
+                <Text>Nomor Telepon (WA aktif)</Text>
                 <InputGroup>
                   <InputLeftAddon >
                     +62
@@ -104,7 +104,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                     type={'tel'}
                     placeholder={'Masukkan nomor telepon'}
                     onChange={handlePhone}
-                    value={data?.phoneNumber}
+                    // value={data?.phoneNumber}
                   />
                 </InputGroup>
               </Box>
@@ -118,7 +118,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                   ))}
                 </Select>
               </Box>
-              <Box>
+              {/* <Box>
                 <Text>Alamat</Text>
                 <Textarea
                   _placeholder={{ color: 'gray.100' }}
@@ -128,7 +128,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                   }
                   value={data?.address}
                 />
-              </Box>
+              </Box> */}
             </Stack>
           </Stack>
           <Flex justifyContent={'flex-end'} mt={10}>
