@@ -16,7 +16,7 @@ import { Fade } from 'react-awesome-reveal';
 const BalanceComponent = ({data, setData, options, setIndex }) => {
   return (
     <>
-      <Fade direction='up' duration={500}>
+      {/* <Fade direction='up' duration={500}> */}
         <Container maxW={'7xl'} pt={{ base: 100, lg: '8%' }}>
           <Stack flexDirection={'column'} alignItems={'center'}>
             <Text fontSize={'xl'} fontWeight={'bold'}>
@@ -63,7 +63,7 @@ const BalanceComponent = ({data, setData, options, setIndex }) => {
             </HStack>
           </Flex>
         </Container>
-      </Fade>
+      {/* </Fade> */}
     </>
   );
 };

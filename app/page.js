@@ -92,7 +92,7 @@ export default function Home() {
                   bg: 'blue.700',
                 }}
               >
-                <Link href={'new'}>Mulai Sekarang</Link>
+                <Link href={'new'} target='_blank'>Mulai Sekarang</Link>
               </Button>
               <Button rounded={'full'} leftIcon={<FaPlay />}>
                 <Link href={'#'}>Gimana Cara Kerjanya?</Link>

@@ -16,7 +16,7 @@ import { Fade } from 'react-awesome-reveal';
 const CriterionComponent = ({ options, setIndex, data, setData }) => {
   return (
     <>
-      <Fade direction='up' duration={500}>
+      {/* <Fade direction='up' duration={500}> */}
         <Container maxW={'7xl'} pt={{ base: 100, lg: '8%' }}>
           <Stack
             flexDirection={'column'}
@@ -78,7 +78,7 @@ const CriterionComponent = ({ options, setIndex, data, setData }) => {
             </HStack>
           </Flex>
         </Container>
-      </Fade>
+      {/* </Fade> */}
     </>
   );
 };

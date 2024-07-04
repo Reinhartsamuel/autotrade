@@ -29,6 +29,8 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
       phone = '62' + value?.slice(1);
     } else if (typeof value === 'string' || value?.startsWith('+62')) {
       phone = value?.slice(1);
+    } else {
+      phone = '62' + value
     }
     setData({ ...data, phoneNumber: phone });
   };
@@ -53,7 +55,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
   };
   return (
     <>
-      <Fade direction='up' duration={500}>
+      {/* <Fade direction='up' duration={500}> */}
         <Container maxW={'7xl'} pt={{ base: 100, lg: '8%' }}>
           <Stack
             flexDirection={'column'}
@@ -140,7 +142,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
             </HStack>
           </Flex>
         </Container>
-      </Fade>
+      {/* </Fade> */}
     </>
   );
 };
