@@ -74,7 +74,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                 <Text>Nama Lengkap</Text>
                 <Input
                   _placeholder={{ color: 'gray.100' }}
-                  placeholder={'Masukkan nama sesuai KTP'}
+                  placeholder={'Masukkan nama anda'}
                   onChange={(e) => setData({ ...data, name: e.target.value })}
                   value={data?.name}
                 />
