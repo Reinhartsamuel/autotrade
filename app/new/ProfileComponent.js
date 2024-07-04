@@ -11,12 +11,14 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Select,
   Stack,
   Text,
   Textarea,
   useToast,
 } from '@chakra-ui/react';
 import { Fade } from 'react-awesome-reveal';
+import Cities from '../config/cititesAndRegions.json';
 
 const ProfileComponent = ({ setIndex, data, setData }) => {
   const toast = useToast();
@@ -108,13 +110,13 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
               </Box>
               <Box>
                 <Text>Kota</Text>
-                <Input
-                  _placeholder={{ color: 'gray.100' }}
-                  placeholder={'Ketik nama kota'}
-                  type={'text'}
-                  onChange={(e) => setData({ ...data, city: e.target.value })}
-                  value={data?.city}
-                />
+                <Select onChange={(e) => setData({...data, city:e.target.value})}>
+                  {Cities?.map((x, i) => (
+                    <option key={i} value={`${x?.type} ${x?.city_name}`}>
+                      {x?.city_name} ({x?.type})
+                    </option>
+                  ))}
+                </Select>
               </Box>
               <Box>
                 <Text>Alamat</Text>
