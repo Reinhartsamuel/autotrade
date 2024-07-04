@@ -37,9 +37,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
     if (
       !data?.name ||
       !data?.email ||
-      !data?.phoneNumber ||
-      !data?.city ||
-      !data?.address
+      !data?.phoneNumber
     )
       return toast({
         title: 'Data belum lengkap!',
