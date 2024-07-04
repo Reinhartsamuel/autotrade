@@ -96,8 +96,8 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                     +62
                   </InputLeftAddon>
                   <Input
-                    bg={'white'}
-                    color={'black'}
+                    // bg={'white'}
+                    color={'white'}
                     _placeholder={{ color: 'gray.100' }}
                     type={'tel'}
                     placeholder={'Masukkan nomor telepon'}
