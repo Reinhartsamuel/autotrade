@@ -95,6 +95,7 @@ const MeetingBookingComponent = ({ setIndex, data, setData }) => {
               <Text>Pilih Jam : </Text>
               {/* <Center> */}
               <Input
+                minDate={new Date()}
                 maxW={{ base: '50%', lg: '10rem' }}
                 fontSize={20}
                 fontWeight={'bold'}
@@ -111,6 +112,7 @@ const MeetingBookingComponent = ({ setIndex, data, setData }) => {
                 defaultValue={moment(selectedDate).format('HH:mm:ss')}
                 type={'time'}
               />
+              <Text color={'yellow'} fontWeight={'bold'}as={'i'}>Harap memilih antara pukul 11:00 - 17:00</Text>
             </Stack>
           </SimpleGrid>
           <Text textAlign={'center'} color={'gray.300'} as={'i'}>

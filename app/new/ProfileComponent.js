@@ -23,24 +23,17 @@ import Cities from '../config/cititesAndRegions.json';
 const ProfileComponent = ({ setIndex, data, setData }) => {
   const toast = useToast();
   const handlePhone = (e) => {
-    let { value } = e.target;
-    let phone = value;
-    if (typeof value === 'string' && value?.startsWith('0')) {
-      phone = '62' + value?.slice(1);
-    } else if (typeof value === 'string' || value?.startsWith('+62')) {
-      phone = value?.slice(1);
-    } else {
-      phone = '62' + value
-    }
+    let phone = '62' + e.target.value;
+
+    if (phone.startsWith('620')) phone = '62' + phone.slice(3);
+    if (phone.startsWith('+')) phone = phone.slice(1);
+
     setData({ ...data, phoneNumber: phone });
+
   };
 
   const validate = () => {
-    if (
-      !data?.name ||
-      !data?.email ||
-      !data?.phoneNumber
-    )
+    if (!data?.name || !data?.email || !data?.phoneNumber)
       return toast({
         title: 'Data belum lengkap!',
         description:
@@ -56,69 +49,64 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
   return (
     <>
       {/* <Fade direction='up' duration={500}> */}
-        <Container maxW={'7xl'} pt={{ base: 100, lg: '8%' }}>
-          <Stack
-            flexDirection={'column'}
-            // alignItems={'center'}
-            // justifyContent={'center'}
-          >
-            <Text
-              mt={5}
-              textAlign={'center'}
-              fontSize={'xl'}
-              fontWeight={'bold'}
-            >
-              Isi data diri kamu dengan benar:
-            </Text>
+      <Container maxW={'7xl'} pt={{ base: 100, lg: '8%' }}>
+        <Stack
+          flexDirection={'column'}
+          // alignItems={'center'}
+          // justifyContent={'center'}
+        >
+          <Text mt={5} textAlign={'center'} fontSize={'xl'} fontWeight={'bold'}>
+            Isi data diri kamu dengan benar:
+          </Text>
 
-            <Stack mt={10}>
-              <Box>
-                <Text>Nama Lengkap</Text>
+          <Stack mt={10}>
+            <Box>
+              <Text>Nama Lengkap</Text>
+              <Input
+                _placeholder={{ color: 'gray.100' }}
+                placeholder={'Masukkan nama anda'}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
+                value={data?.name}
+              />
+            </Box>
+            <Box>
+              <Text>Email</Text>
+              <Input
+                _placeholder={{ color: 'gray.100' }}
+                placeholder={'Masukkan email'}
+                type={'email'}
+                onChange={(e) => setData({ ...data, email: e.target.value })}
+                value={data?.email}
+              />
+            </Box>
+            <Box>
+              <Text>Nomor Telepon (WA aktif)</Text>
+              <InputGroup>
+                <InputLeftAddon>+62</InputLeftAddon>
                 <Input
+                  // bg={'white'}
+                  color={'white'}
                   _placeholder={{ color: 'gray.100' }}
-                  placeholder={'Masukkan nama anda'}
-                  onChange={(e) => setData({ ...data, name: e.target.value })}
-                  value={data?.name}
+                  type={'tel'}
+                  placeholder={'Masukkan nomor telepon'}
+                  onChange={handlePhone}
+                  // value={data?.phoneNumber}
                 />
-              </Box>
-              <Box>
-                <Text>Email</Text>
-                <Input
-                  _placeholder={{ color: 'gray.100' }}
-                  placeholder={'Masukkan email'}
-                  type={'email'}
-                  onChange={(e) => setData({ ...data, email: e.target.value })}
-                  value={data?.email}
-                />
-              </Box>
-              <Box>
-                <Text>Nomor Telepon (WA aktif)</Text>
-                <InputGroup>
-                  <InputLeftAddon >
-                    +62
-                  </InputLeftAddon>
-                  <Input
-                    // bg={'white'}
-                    color={'white'}
-                    _placeholder={{ color: 'gray.100' }}
-                    type={'tel'}
-                    placeholder={'Masukkan nomor telepon'}
-                    onChange={handlePhone}
-                    // value={data?.phoneNumber}
-                  />
-                </InputGroup>
-              </Box>
-              <Box>
-                <Text>Kota</Text>
-                <Select onChange={(e) => setData({...data, city:e.target.value})}>
-                  {Cities?.map((x, i) => (
-                    <option key={i} value={`${x?.type} ${x?.city_name}`}>
-                      {x?.city_name} ({x?.type})
-                    </option>
-                  ))}
-                </Select>
-              </Box>
-              {/* <Box>
+              </InputGroup>
+            </Box>
+            <Box>
+              <Text>Kota</Text>
+              <Select
+                onChange={(e) => setData({ ...data, city: e.target.value })}
+              >
+                {Cities?.map((x, i) => (
+                  <option key={i} value={`${x?.type} ${x?.city_name}`}>
+                    {x?.city_name} ({x?.type})
+                  </option>
+                ))}
+              </Select>
+            </Box>
+            {/* <Box>
                 <Text>Alamat</Text>
                 <Textarea
                   _placeholder={{ color: 'gray.100' }}
@@ -129,19 +117,17 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                   value={data?.address}
                 />
               </Box> */}
-            </Stack>
           </Stack>
-          <Flex justifyContent={'flex-end'} mt={10}>
-            <HStack>
-              <Button onClick={() => setIndex((prev) => prev - 1)}>
-                {'<'}- Kembali
-              </Button>
-              <Button onClick={validate}>
-                Lanjut -{'>'}
-              </Button>
-            </HStack>
-          </Flex>
-        </Container>
+        </Stack>
+        <Flex justifyContent={'flex-end'} mt={10}>
+          <HStack>
+            <Button onClick={() => setIndex((prev) => prev - 1)}>
+              {'<'}- Kembali
+            </Button>
+            <Button onClick={validate}>Lanjut -{'>'}</Button>
+          </HStack>
+        </Flex>
+      </Container>
       {/* </Fade> */}
     </>
   );

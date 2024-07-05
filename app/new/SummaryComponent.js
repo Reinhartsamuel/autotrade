@@ -16,7 +16,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import moment from 'moment';
 import { addDocumentFirebase } from '../utils/firebaseApi';
 
-const SummaryComponent = ({ data, setData }) => {
+const SummaryComponent = ({ setIndex, data, setData }) => {
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const toast = useToast();
@@ -107,6 +107,10 @@ const SummaryComponent = ({ data, setData }) => {
             </Button>
           </>
         )}
+
+        <Button onClick={() => setIndex((prev) => prev - 1)}>
+          {'<'}- Kembali
+        </Button>
 
         {isSubmitted && data?.response?.htmlLink && (
           <>
