@@ -108,9 +108,9 @@ const SummaryComponent = ({ setIndex, data, setData }) => {
           </>
         )}
 
-        <Button onClick={() => setIndex((prev) => prev - 1)}>
+        {/* <Button onClick={() => setIndex((prev) => prev - 1)}>
           {'<'}- Kembali
-        </Button>
+        </Button> */}
 
         {isSubmitted && data?.response?.htmlLink && (
           <>
