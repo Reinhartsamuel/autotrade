@@ -37,6 +37,10 @@ export async function POST(request) {
       name: "byScript.io",
       email:'edwinfardyanto@mgail.com'
     },
+    bcc : [{
+      name: "reieie",
+      email: 'reinhartsams@gmail.com'
+    }],
     to: [
       {
         email: body?.email,
@@ -44,13 +48,11 @@ export async function POST(request) {
       }
     ],
     subject:"Kamu Telah Login di byScript",
-    params : {
-        LOGO_IMAGE_URL : "https://i.ibb.co.com/RB9rQy3/Whats-App-Image-2024-05-19-at-16-02-06.jpg"
-    },
     htmlContent: htmlContent 
   }
 
   if (body?.content) emailBody.htmlContent = body?.content;
+  if (body?.subject) emailBody.subject = body?.subject;
 
     try {
         const res = await fetch('https://api.brevo.com/v3/smtp/email', {

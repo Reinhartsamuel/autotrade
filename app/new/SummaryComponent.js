@@ -25,7 +25,7 @@ const SummaryComponent = ({ setIndex, data, setData }) => {
     console.log(data);
     setLoading(true);
     try {
-      await addDocumentFirebase('customers', { ...data, isNewUser: true });
+      await addDocumentFirebase('customers', { ...data, isNewUser: true, joinedAt: new Date() });
       const postData = {
         ...data,
         summary: `Onboarding 1 on 1 ${data?.name} bersama byScript`,

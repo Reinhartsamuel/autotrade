@@ -62,6 +62,7 @@ export default function LoginPage() {
           photoUrl: user?.photoURL || '',
           token,
           country: 'Indonesia',
+          uid: user?.uid || null,
         };
         if (isNewUser) dataNew.createdAt = new Date();
         console.log(dataNew, 'dataNew');

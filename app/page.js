@@ -81,19 +81,21 @@ export default function Home() {
               <i>script</i>
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-              <Button
-                rounded={'full'}
-                bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-                _active={{
-                  bg: 'blue.700',
-                }}
-              >
-                <Link href={'new'} target='_blank'>Mulai Sekarang</Link>
-              </Button>
+              <Link href={'new'}>
+                <Button
+                  rounded={'full'}
+                  bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }}
+                  _active={{
+                    bg: 'blue.700',
+                  }}
+                >
+                  Mulai Sekarang
+                </Button>
+              </Link>
               <Button rounded={'full'} leftIcon={<FaPlay />}>
                 <Link href={'#'}>Gimana Cara Kerjanya?</Link>
               </Button>

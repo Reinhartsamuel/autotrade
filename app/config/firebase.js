@@ -9,14 +9,14 @@ import { getAuth } from 'firebase/auth';
 const app_mode = process.env.NEXT_PUBLIC_APP_MODE;
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBIavwhCNLqUyYT6ZMKiR-myuKbkMOBs0A",
-    authDomain: "saudagar-92dc2.firebaseapp.com",
-    projectId: "saudagar-92dc2",
-    storageBucket: "saudagar-92dc2.appspot.com",
-    messagingSenderId: "505071838454",
-    appId: "1:505071838454:web:9991becf5e57b04a1938d7",
-    measurementId: "G-XGCJN7DQEP"
-};
+    apiKey: "AIzaSyBrJtG-8_KeYSXal6UR1o3SUCX1NwzfW4g",
+    authDomain: "byscript-io.firebaseapp.com",
+    projectId: "byscript-io",
+    storageBucket: "byscript-io.appspot.com",
+    messagingSenderId: "757580490638",
+    appId: "1:757580490638:web:ab6bfab9f2f8bad74166df",
+    measurementId: "G-T4VFYB93R5"
+  };
 
 const firebaseConfigStaging = {
     apiKey: "AIzaSyDJt25hHsouxWKaGAwX5lRqCGtv4v2vr18",
