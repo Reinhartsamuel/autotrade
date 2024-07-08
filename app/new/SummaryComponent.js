@@ -45,6 +45,31 @@ const SummaryComponent = ({ setIndex, data, setData }) => {
         },
         body: JSON.stringify(postData),
       });
+      await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "sender" : {
+            "email" :"byscript@gmail.com",
+            "name" : "byScript"
+          },
+            "cc": [
+                {
+                  "name": "Reinhart",
+                  "email": "reinhartsams@gmail.com"
+                }
+              ],
+              "to" : [{
+                "name" : "Edwin Ardyanto",
+                "email" : "edwinfardyanto@gmail.com"
+              }],
+              "subject" : "Pendaftar Baru",
+              "htmlContent" : `<p>Seseorang telah mendaftar di byScript nama : <strong>${data?.name}</strong> email : ${data?.email}, onboarding : ${data?.conferenceStart}</p>`
+        }),
+      })
+
       const result = await res.json();
       if (!result.status) throw new Error(result.message);
       setData({ ...data, response: result?.data });

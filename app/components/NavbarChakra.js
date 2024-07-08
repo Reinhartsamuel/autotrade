@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Stack,
   Image,
+  Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
@@ -43,7 +44,7 @@ const NavLink = ({ children }) => (
     }}
   >
     <Link href={children?.link} replace>
-      {children?.name}
+      <Text fontWeight={'700'} spacing={2}>{children?.name}</Text>
     </Link>
   </Box>
 );
@@ -51,7 +52,7 @@ const NavLink = ({ children }) => (
 export default function NavbarChakra() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [user, setUser] = useState(authFirebase.currentUser);
-  const [withoutNavbar, setWithoutNavbar] = useState(false);
+  const [withoutNavbar, setWithoutNavbar] = useState(true);
   const router = useRouter();
   const params = useSearchParams();
   const referralId = params.get('ref');
@@ -74,12 +75,12 @@ export default function NavbarChakra() {
 
   useEffect(() => {
     const x =
-      window?.location?.href?.includes('auth') ||
-      window?.location?.href?.includes('onboarding') ||
-      window?.location?.href?.includes('checkout') ||
-      window?.location?.href?.includes('new');
+      window?.location.href.includes('auth') ||
+      window?.location.href.includes('onboarding') ||
+      window?.location.href.includes('checkout') ||
+      window?.location.href.includes('new');
       console.log(x, 'without navbar useEffect')
-    setWithoutNavbar(x === null ? false : true);
+    setWithoutNavbar(x);
     const unsubscribe = authFirebase.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);

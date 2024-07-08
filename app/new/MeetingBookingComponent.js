@@ -20,6 +20,7 @@ import {
   Image,
   Divider,
   Center,
+  useToast,
 } from '@chakra-ui/react';
 import { Fade } from 'react-awesome-reveal';
 import Calendar from 'react-calendar';
@@ -42,6 +43,7 @@ const MeetingBookingComponent = ({ setIndex, data, setData }) => {
   const inputDateRef = useRef();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const cancelRef = useRef(null);
+  const toast = useToast();
 
   const handleNext = () => {
     console.log(data)
@@ -50,6 +52,9 @@ const MeetingBookingComponent = ({ setIndex, data, setData }) => {
   };
 
   const handleOpenModal = () => {
+    const inTimeWindow = moment(selectedDate).isBetween(moment('11:00', 'HH:mm'), moment('17:00', 'HH:mm'));
+    console.log(inTimeWindow, 'inTimeWindow')
+    if (!inTimeWindow) return toast({status : 'error', title : 'Tidak tersedia', description: 'Mohon pilih waktu antara 11:00 - 17:00 WIB', duration: 3000, position:'top-right'})
     onOpen();
     setData({
       ...data,

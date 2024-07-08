@@ -77,7 +77,7 @@ export default function Home() {
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-              Bantu kamu <o>traders</o> untuk trading secara otomatis dengan{' '}
+              Bantu kamu <i>traders</i> untuk trading secara otomatis dengan{' '}
               <i>script</i>
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
@@ -134,14 +134,15 @@ export default function Home() {
 
         <Box
           zIndex={-1}
-          w={{ base: 300, sm: 400, md: 500, lg: 800 }}
-          h={{ base: 300, sm: 400, md: 500, lg: 800 }}
+          w={{ base: 300, sm: 400, md: 500, lg: 500 }}
+          h={{ base: 300, sm: 400, md: 500, lg: 500 }}
           bgGradient={'linear(to-l,#5DE1E6, #031B4B)'}
           borderRadius={'full'}
-          filter={{ base: 'blur(50px)', md: 'blur(80px)', lg: 'blur(200px)' }}
+          filter={{ base: 'blur(50px)', md: 'blur(80px)', lg: 'blur(100px)' }}
           style={{ transform: 'translateX(-100%)' }}
           position={'absolute'}
         ></Box>
+        
       </Stack>
       <StepsComponent />
       <Testimonials />

@@ -66,6 +66,7 @@ const createEvent = async (auth, event) => {
       conferenceDataVersion: 1,
     });
     // console.log('anjing::::', anjing);
+    await adminDb.collection('calendar_events').doc(result.data.id).set({...result.data, createdAt : new Date()});
     return result.data;
   } catch (error) {
     throw new Error(error);

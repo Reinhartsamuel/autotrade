@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
           <Providers>
             {/* <Navbar /> */}
             <NavbarChakra />
+            {/* <Heading>href:: {href}</Heading> */}
             {children}
             <Footer />
           </Providers>
