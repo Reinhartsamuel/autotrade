@@ -22,6 +22,7 @@ import Testimonials from './components/Testimonials';
 import Link from 'next/link';
 import StepsComponent from './components/StepsComponent';
 import CarouselComponent from './components/CarouselComponent';
+import VideoPlayer from './components/VideoPlayer';
 
 export default function Home() {
   return (
@@ -113,6 +114,22 @@ export default function Home() {
           />
         </Flex>
       </Stack>
+      {/* <Stack
+        minH={{base:'800', xl:'100vh'}}
+        direction={{ base: 'column', lg: 'row' }}
+        pt={{ base: 100, xl: 0 }}
+        position={'relative'}
+      >
+        <Flex w={'full'} flex={1} alignItems={'center'} justifyContent={'center'}>
+          <Box w={{ base: 'full', sm: 400, md: 500, lg: 800 }}>
+            <VideoPlayer
+              url={
+                'https://rr5---sn-npoeened.googlevideo.com/videoplayback?expire=1720486198&ei=1jSMZoTtFf2_6dsPlLiVyAM&ip=148.251.137.140&id=o-ADQ_oG-c820fjjI5jXM0_Jw_QnnKMnhd7Q2cp4t43oGV&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&vprv=1&svpuc=1&mime=video%2Fmp4&rqh=1&gir=yes&clen=25826337&ratebypass=yes&dur=946.050&lmt=1713240754098041&c=ANDROID_TESTSUITE&txp=6219224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cvprv%2Csvpuc%2Cmime%2Crqh%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIgB2hx1onikBtq71DG3f-hATuqSQRytgfmYlvmESfGyF0CIQChdhXOd0S6QqkQtl51ZWvwpl2iw6Xgc0YKADolMGHjpg%3D%3D&title=Beli%20Bitcoin%20%241000%20Setiap%20Tanggal%201%20Pakai%20Algoritma%2C%20Apakah%20Cuan%3F%3F&rm=sn-4g5ekd76,sn-xmjxajvh-jb3zz7e&fexp=24350518&req_id=363e0c64f22fa3ee&ipbypass=yes&redirect_counter=3&cm2rm=sn-nposz76&cms_redirect=yes&cmsv=e&mh=DH&mip=140.213.11.14&mm=34&mn=sn-npoeened&ms=ltu&mt=1720464282&mv=m&mvi=5&pl=24&lsparams=ipbypass,mh,mip,mm,mn,ms,mv,mvi,pl&lsig=AHlkHjAwRQIgClyn_zDR94fWhF8EYFnf_KsjlA3ONgDcuPmqG7C91rECIQCLY0wuY-fatboMtBRN8IX8fSWpuYLjgobcFM284CaNzA%3D%3D'
+              }
+            />
+          </Box>
+        </Flex>
+      </Stack> */}
       <Stack position={'relative'}>
         <SimpleGrid p={5} columns={{ base: 1, lg: 2 }} gap={10}>
           <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
@@ -142,7 +159,6 @@ export default function Home() {
           style={{ transform: 'translateX(-100%)' }}
           position={'absolute'}
         ></Box>
-        
       </Stack>
       <StepsComponent />
       <Testimonials />
