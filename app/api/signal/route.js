@@ -3,9 +3,9 @@ import { adminDb } from "../../../lib/firebase-admin-config";
 export async function POST (request) {
     try {
         const body = await request.json();
-        const res = await adminDb.collection('webhook').add({
+        const res = await adminDb.collection('webhooks').add({
             ...body,
-            createdAt : new Data(),
+            createdAt : new Date(),
             type: 'signal'
         });
         return Response.json({
