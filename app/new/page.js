@@ -4,7 +4,7 @@ import {
   Stack,
 
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CriterionComponent from './CriterionComponent';
 import ActivitiesComponent from './ActivitiesComponent';
 import BalanceComponent from './BalanceComponent';
@@ -102,6 +102,19 @@ const page = () => {
     minBalance:0,
     maxBalance: null
   });
+
+
+
+  useEffect(() => {
+    const position = async () => {
+      await navigator.geolocation.getCurrentPosition(
+        (position) => console.log(position, 'this is position'), 
+        (err) => console.log(err, 'errrr')
+      );
+    }
+
+    // position();
+  },[])
 
   return (
     <>
