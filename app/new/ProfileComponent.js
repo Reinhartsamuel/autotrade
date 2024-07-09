@@ -67,6 +67,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                 placeholder={'Masukkan nama anda'}
                 onChange={(e) => setData({ ...data, name: e.target.value })}
                 value={data?.name}
+                defaultValue={data?.name}
               />
             </Box>
             <Box>
@@ -77,6 +78,7 @@ const ProfileComponent = ({ setIndex, data, setData }) => {
                 type={'email'}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
                 value={data?.email}
+                defaultValue={data?.email}
               />
             </Box>
             <Box>

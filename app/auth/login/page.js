@@ -45,15 +45,13 @@ export default function LoginPage() {
       const user = result.user;
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      // console.log(token, 'token');
-      // console.log('fetching user with email ', result?.user?.email);
       const findUser = await getCollectionFirebase('users', [
         { field: 'email', operator: '==', value: result?.user?.email },
       ]);
-      const isNewUser = findUser.length === 0;
-      console.log(isNewUser, 'isNewUser');
-      console.log(findUser, 'findUser');
-
+      const findCustomer = await getCollectionFirebase('customers', [
+        { field: 'email', operator: '==', value: result?.user?.email },
+      ]);
+      const isNewUser = findUser.length === 0 && findCustomer?.length === 0;
       try {
         const dataNew = {
           name: user?.displayName || '',
@@ -65,8 +63,8 @@ export default function LoginPage() {
           uid: user?.uid || null,
         };
         if (isNewUser) dataNew.createdAt = new Date();
-        console.log(dataNew, 'dataNew');
         await setDocumentFirebase('users', user.uid, dataNew);
+        if (isNewUser) router.push('/new');
       } catch (error) {
         console.log(error.message, 'error setdoc users');
       }

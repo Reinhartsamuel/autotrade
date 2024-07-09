@@ -11,6 +11,7 @@ import BalanceComponent from './BalanceComponent';
 import ProfileComponent from './ProfileComponent';
 import MeetingBookingComponent from './MeetingBookingComponent';
 import SummaryComponent from './SummaryComponent';
+import { authFirebase } from '../config/firebase';
 
 const options = {
   criterions: [
@@ -94,7 +95,13 @@ const options = {
 
 const page = () => {
   const [index, setIndex] = useState(0);
-  const [data, setData] = useState({profile:'',name:'', email:'', phoneNumber:'', balance:''});
+  const [data, setData] = useState({
+    profile:'',name:authFirebase.currentUser?.displayName || '', 
+    email: authFirebase.currentUser?.email || '', 
+    phoneNumber: authFirebase.currentUser?.phoneNumber || '', 
+    minBalance:0,
+    maxBalance: null
+  });
 
   return (
     <>

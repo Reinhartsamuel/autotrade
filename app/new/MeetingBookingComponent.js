@@ -34,6 +34,7 @@ const images = [
   'https://firebasestorage.googleapis.com/v0/b/saudagar-staging.appspot.com/o/transfer-receipt%2FKrTqD6lD4yQtTW0SyKe2pFTUFbx2%2FWhatsApp%20Image%202024-07-03%20at%2016.47.07%20(1).jpeg?alt=media&token=adc17bb9-b5fd-4164-ad9a-ffc1f5a4b731',
   'https://firebasestorage.googleapis.com/v0/b/saudagar-staging.appspot.com/o/transfer-receipt%2FKrTqD6lD4yQtTW0SyKe2pFTUFbx2%2FWhatsApp%20Image%202024-07-03%20at%2016.47.07.jpeg?alt=media&token=2ffe2868-5089-4c0e-86e9-4fa1a2cbbcb1',
   'https://firebasestorage.googleapis.com/v0/b/saudagar-staging.appspot.com/o/transfer-receipt%2FKrTqD6lD4yQtTW0SyKe2pFTUFbx2%2Fstory.jpg?alt=media&token=1efc590d-b2d7-4f6f-8402-319cf15b3d82',
+  'https://i.ibb.co.com/X7kP5mR/gmeet.jpg'
 ];
 const meet =
   'https://firebasestorage.googleapis.com/v0/b/saudagar-staging.appspot.com/o/transfer-receipt%2FKrTqD6lD4yQtTW0SyKe2pFTUFbx2%2Fgoogle-meet.256x256.png?alt=media&token=34ef05de-b914-4adf-8444-11d27bec8fdc';
@@ -52,7 +53,9 @@ const MeetingBookingComponent = ({ setIndex, data, setData }) => {
   };
 
   const handleOpenModal = () => {
-    const inTimeWindow = moment(selectedDate).isBetween(moment('11:00', 'HH:mm'), moment('17:00', 'HH:mm'));
+    // const inTimeWindow = moment(selectedDate).isBetween(moment('11:00', 'HH:mm'), moment('17:00', 'HH:mm'));
+    const inTimeWindow = moment(selectedDate).format('HH') >= '11' && moment(selectedDate).format('HH') <= '17' && moment(selectedDate).format('mm') <= '59';
+    console.log(moment(selectedDate).format('HH:mm'));
     console.log(inTimeWindow, 'inTimeWindow')
     if (!inTimeWindow) return toast({status : 'error', title : 'Tidak tersedia', description: 'Mohon pilih waktu antara 11:00 - 17:00 WIB', duration: 3000, position:'top-right'})
     onOpen();
@@ -114,7 +117,7 @@ const MeetingBookingComponent = ({ setIndex, data, setData }) => {
                     })
                   );
                 }}
-                defaultValue={moment(selectedDate).format('HH:mm:ss')}
+                value={moment(selectedDate).format('HH:mm')}
                 type={'time'}
               />
               <Text color={'yellow'} fontWeight={'bold'}as={'i'}>Harap memilih antara pukul 11:00 - 17:00</Text>
