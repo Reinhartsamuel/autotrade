@@ -35,7 +35,7 @@ export default function Home() {
         pt={{ base: 100, xl: 0 }}
         position={'relative'}
       >
-        <Box
+        {/* <Box
           zIndex={-1}
           w={{ base: 250, sm: 400, md: 500, lg: 800 }}
           h={{ base: 250, sm: 400, md: 500, lg: 800 }}
@@ -46,7 +46,29 @@ export default function Home() {
           // style={{ transform: 'translateX(60%)' }}
           transform={'translateX(60%)'}
           position={'absolute'}
+        ></Box> */}
+        <Box
+          zIndex={-1}
+          w={{ base: 300, md: 500, lg: 800 }}
+          h={{ base: 100, md: 200, lg: 800 }}
+          bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+          borderRadius={'full'}
+          style={{ filter: 'blur(100px)' }}
+          position={'absolute'}
         ></Box>
+        <Box
+            zIndex={-1}
+            w={{ base: 300, md: 500, lg: 800 }}
+            h={{ base: 100, md: 200, lg: 800 }}
+            bgGradient={'linear(to-l,#8C52FF,#031B4B)'}
+            borderRadius={'full'}
+            style={{
+              filter: 'blur(100px)',
+              transform: 'translateX(-100%)',
+              top: 0,
+            }}
+            position={'absolute'}
+          ></Box>
         {/* <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}> */}
         <Flex p={8} flex={1} justify={'center'} flexDirection={'column'}>
           <Box>

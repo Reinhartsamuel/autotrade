@@ -1,12 +1,17 @@
 // theme.js
 
 // 1. import `extendTheme` function
-import { extendTheme } from '@chakra-ui/react'
+import { background, extendTheme } from '@chakra-ui/react'
 
 // 2. Add your color mode config
 const config = {
   initialColorMode: 'dark',
   useSystemColorMode: true,
+  colors: {
+    dark: {
+      bg: 'red', // override default dark mode background color
+    },
+  },
 }
 
 // 3. extend the theme
