@@ -1,9 +1,13 @@
+
 export async function GET(request) {
   try {
-    console.log(request.nextUrl, 'this is the request.nexturl');
-    console.log(request.cookies, 'this is the request cookies');
-    return Response.json({ message: 'hello world' });
+    const url = new URL(request.url); // or 'https://localhost' if you're using HTTPS
+    const origin = url.origin;
+    const host = url.host;
+
+
+    return Response.json({ message: 'hello world',origin, host, status: 'success' });
   } catch (error) {
-    return Response.json({ message: error.message, error:error, status: 'error' });
+    return Response.json({ message: error.message, error: error, status: 'error' });
   }
 }
