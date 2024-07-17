@@ -1,3 +1,5 @@
+import corsMiddleware from './app/api/middleware';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
@@ -15,6 +17,7 @@ const nextConfig = {
           fullUrl: true,
         },
       },
+      middleware : [corsMiddleware]
 };
 
 export default nextConfig;
