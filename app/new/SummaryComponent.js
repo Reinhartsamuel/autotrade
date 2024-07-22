@@ -173,7 +173,7 @@ const SummaryComponent = ({ setIndex, data, setData }) => {
                 bg={'#075e54'}
                 onClick={() =>
                   window.open(
-                    `https://wa.me/6281313383848/?text=Halo kak, saya sudah mendaftar onboarding byScript dan pada hari ${moment(
+                    `https://wa.me/6281313383848/?text=Halo kak, saya ${data?.name} sudah mendaftar onboarding byScript dan pada hari ${moment(
                       data?.conferenceStart
                     ).format(
                       'dddd, D MMMM YYYY HH:mm'
