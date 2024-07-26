@@ -3,27 +3,27 @@ export async function POST(request) {
     const body = await request.json();
 
     let htmlContent = '';
-    const emailBody = {
-      ...body,
-      sender: {
-        name: 'byScript.io',
-        email: 'edwinfardyanto@mgail.com',
-      },
-      bcc: [
-        {
-          name: 'reieie',
-          email: 'reinhartsams@gmail.com',
-        },
-      ],
-      to: [
-        {
-          email: body?.email,
-          name: body?.name,
-        },
-      ],
-      subject: 'Kamu Telah Login di byScript',
-      htmlContent: htmlContent,
-    };
+    // const emailBody = {
+    //   ...body,
+    //   sender: {
+    //     name: 'byScript.io',
+    //     email: 'edwinfardyanto@mgail.com',
+    //   },
+    //   bcc: [
+    //     {
+    //       name: 'reieie',
+    //       email: 'reinhartsams@gmail.com',
+    //     },
+    //   ],
+    //   to: [
+    //     {
+    //       email: body?.email,
+    //       name: body?.name,
+    //     },
+    //   ],
+    //   subject: 'Kamu Telah Login di byScript',
+    //   htmlContent: htmlContent,
+    // };
 
     console.log(body);
 

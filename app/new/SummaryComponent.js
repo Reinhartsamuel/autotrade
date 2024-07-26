@@ -26,52 +26,52 @@ const SummaryComponent = ({ setIndex, data, setData }) => {
     setLoading(true);
     try {
       await addDocumentFirebase('customers', { ...data, isNewUser: true, joinedAt: new Date() });
-      const postData = {
-        ...data,
-        summary: `Onboarding 1 on 1 ${data?.name} bersama byScript`,
-        location: 'Online',
-        description: `Onboarding 1 on 1 ${data?.name} bersama byScript`,
-        start: { dateTime: data?.conferenceStart, timeZone: 'Asia/Jakarta' },
-        end: { dateTime: data?.conferenceEnd, timeZone: 'Asia/Jakarta' },
-        attendees: [
-          { email: 'edwinfardyanto@gmail.com' },
-          { email: data?.email },
-        ],
-      };
-      const res = await fetch('/api/calendar/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      });
-      await fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "sender" : {
-            "email" :"byscript@gmail.com",
-            "name" : "byScript"
-          },
-            "cc": [
-                {
-                  "name": "Reinhart",
-                  "email": "reinhartsams@gmail.com"
-                }
-              ],
-              "to" : [{
-                "name" : "Edwin Ardyanto",
-                "email" : "edwinfardyanto@gmail.com"
-              }],
-              "subject" : "Pendaftar Baru",
-              "htmlContent" : `<p>Seseorang telah mendaftar di byScript nama : <strong>${data?.name}</strong> email : ${data?.email}, onboarding : ${data?.conferenceStart}</p>`
-        }),
-      })
+      // const postData = {
+      //   ...data,
+      //   summary: `Onboarding 1 on 1 ${data?.name} bersama byScript`,
+      //   location: 'Online',
+      //   description: `Onboarding 1 on 1 ${data?.name} bersama byScript`,
+      //   start: { dateTime: data?.conferenceStart, timeZone: 'Asia/Jakarta' },
+      //   end: { dateTime: data?.conferenceEnd, timeZone: 'Asia/Jakarta' },
+      //   attendees: [
+      //     { email: 'edwinfardyanto@gmail.com' },
+      //     { email: data?.email },
+      //   ],
+      // };
+      // const res = await fetch('/api/calendar/create', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(postData),
+      // });
+      // await fetch('/api/email', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     "sender" : {
+      //       "email" :"byscript@gmail.com",
+      //       "name" : "byScript"
+      //     },
+      //       "cc": [
+      //           {
+      //             "name": "Reinhart",
+      //             "email": "reinhartsams@gmail.com"
+      //           }
+      //         ],
+      //         "to" : [{
+      //           "name" : "Edwin Ardyanto",
+      //           "email" : "edwinfardyanto@gmail.com"
+      //         }],
+      //         "subject" : "Pendaftar Baru",
+      //         "htmlContent" : `<p>Seseorang telah mendaftar di byScript nama : <strong>${data?.name}</strong> email : ${data?.email}, onboarding : ${data?.conferenceStart}</p>`
+      //   }),
+      // })
 
-      const result = await res.json();
-      if (!result.status) throw new Error(result.message);
+      // const result = await res.json();
+      // if (!result.status) throw new Error(result.message);
       setData({ ...data, response: result?.data });
       setIsSubmitted(true);
       console.log(result, 'result bikin calendar');

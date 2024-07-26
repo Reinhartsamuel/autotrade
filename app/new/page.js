@@ -11,6 +11,7 @@ import BalanceComponent from './BalanceComponent';
 import ProfileComponent from './ProfileComponent';
 import MeetingBookingComponent from './MeetingBookingComponent';
 import SummaryComponent from './SummaryComponent';
+import FormsComponent from './FormsComponent';
 import { authFirebase } from '../config/firebase';
 
 const options = {
@@ -120,12 +121,13 @@ const page = () => {
     <>
         <Stack w={'100vw'} minH={'100vh'}>
           <Progress value={index/5 * 100} size={'xs'} colorScheme={'gray'} setData={setData} />
-          {index === 0 && <CriterionComponent options={options} setIndex={setIndex} setData={setData} data={data} />}
-          {/* {index === 1 && <ActivitiesComponent options={options} setIndex={setIndex} setData={setData} data={data} />} */}
-          {index === 1 && <BalanceComponent options={options} setIndex={setIndex} setData={setData} data={data} />}
-          {index === 2 && <ProfileComponent setIndex={setIndex} setData={setData} data={data} />}
-          {index === 3 && <MeetingBookingComponent setIndex={setIndex} setData={setData} data={data} />}
-          {index === 4 && <SummaryComponent setIndex={setIndex} setData={setData} data={data}  />}
+          {/* {index === 0 && <CriterionComponent options={options} setIndex={setIndex} setData={setData} data={data} />}
+          {index === 1 && <ActivitiesComponent options={options} setIndex={setIndex} setData={setData} data={data} />}
+          {index === 1 && <BalanceComponent options={options} setIndex={setIndex} setData={setData} data={data} />} */}
+          {index === 0 && <FormsComponent setIndex={setIndex} setData={setData} data={data} />}
+          {index === 1 && <ProfileComponent setIndex={setIndex} setData={setData} data={data} />}
+          {index === 2 && <MeetingBookingComponent setIndex={setIndex} setData={setData} data={data} />}
+          {index === 3 && <SummaryComponent setIndex={setIndex} setData={setData} data={data}  />}
           {/* <pre>{JSON.stringify(data, null,2)}</pre> */}
         </Stack>
       
