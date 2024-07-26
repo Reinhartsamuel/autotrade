@@ -3,7 +3,7 @@ import { adminDb } from '../../../../lib/firebase-admin-config';
 export async function POST(request) {
   try {
     const body = await request.json();
-    console.log(body);
+    // console.log(body);
     // THIS IS WHAT THE BODY LOOKS LIKE :
     // {
     //   message_type: 'bot',
@@ -60,14 +60,13 @@ export async function POST(request) {
           })
       )
     );
-    const resultMap = await Promise.all(result.map(async (res) => {
-        return res.status === 'fulfilled' ? await res?.value?.json() : res?.reason || ''
-      }));
-    console.log(resultMap, 'resultMap promise allsettled');
+
+    // console.log(resultMap, 'resultMap promise allsettled');
     await adminDb.collection('webhooks').add({
       ...body,
       type: 'autotrade',
-      result: resultMap || null,
+      createdAt : new Date(),
+      result: result.map((x) => x?.status),
     });
 
     return new Response('ok', {
