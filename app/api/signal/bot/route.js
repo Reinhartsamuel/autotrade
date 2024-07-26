@@ -60,18 +60,14 @@ export async function POST(request) {
           })
       )
     );
-    // const resultMap = result.map((res) => {
-    //     if (res.status === 'fulfilled') {
-    //       return { botId: res?.value?.bot_id ||'', response: res?.value };
-    //     } else {
-    //       return { botId: res?.value?.bot_id ||'', error: res.reason };
-    //     }
-    //   });
-    console.log(result, 'result promise allsettled');
+    const resultMap = await Promise.all(result.map(async (res) => {
+        return res.status === 'fulfilled' ? await res?.value?.json() : res?.reason || ''
+      }));
+    console.log(resultMap, 'resultMap promise allsettled');
     await adminDb.collection('webhooks').add({
       ...body,
       type: 'autotrade',
-    //   result: resultMap,
+      result: resultMap || null,
     });
 
     return new Response('ok', {
