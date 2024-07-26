@@ -6,6 +6,10 @@ export async function POST (request) {
         const doc = await adminDb.collection("test_bot").doc("kJ0kz97t4NxgKdwpbYxY").get();
         const data = doc.data();
 
+        await adminDb.collection("test_bot").add({
+            ...body
+        });
+
         await fetch('/api/email' ,{
             method : 'POST',
             body : JSON.stringify({
