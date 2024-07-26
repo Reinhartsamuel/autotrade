@@ -30,9 +30,7 @@ export async function POST(request) {
       .doc(body?.trading_plan_id)
       .get();
     if (!doc.exists) {
-      console.log('No such document!');
-    } else {
-      console.log('Document data:', doc.data());
+      console.log(`No such document! id ::: ${body?.trading_plan_id}, timestamp : `, new Date().getTime());
     }
     const data = doc.data();
     const botsArray = data?.bots_id || [];
