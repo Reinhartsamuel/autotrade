@@ -7,7 +7,8 @@ export async function POST (request) {
         const data = doc.data();
 
         await adminDb.collection("test_bot").add({
-            ...body
+            ...body,
+            createdAt : new Date()
         });
 
         await fetch('https://app.3commas.io/trade_signal/trading_view' ,{
