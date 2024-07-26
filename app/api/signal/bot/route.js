@@ -10,33 +10,11 @@ export async function POST (request) {
             ...body
         });
 
-        await fetch('/api/email' ,{
+        await fetch('https://app.3commas.io/trade_signal/trading_view' ,{
             method : 'POST',
-            body : JSON.stringify({
-                ...body,
-                sender: {
-                  name: 'byScript.io',
-                  email: 'edwinfardyanto@mgail.com',
-                },
-                bcc: [
-                  {
-                    name: 'reieie',
-                    email: 'reinhartsams@gmail.com',
-                  },
-                ],
-                to: [
-                  {
-                    email:'edwinfardyanto@mgail.com',
-                    name: 'edwin',
-                  },
-                ],
-                subject: 'testing signal bot subscribers',
-                htmlContent: `Trading plan : ${data?.trading_plan_name}, bot ids: ${data?.bots_id?.join(', ')}`,
-              })
+            body : JSON.stringify(body)
 
         })
-
-
 
         return new Response('Signal success!', {
             status: 200,
