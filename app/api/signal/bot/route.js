@@ -73,6 +73,10 @@ export async function POST(request) {
       type: 'autotrade',
     //   result: resultMap,
     });
+
+    return new Response('ok', {
+        status : 200
+    })
   } catch (error) {
     console.log(error.message, 'error autotrade');
     return new Response(error.message, {
