@@ -64,7 +64,7 @@ export async function POST(request) {
         if (res.status === 'fulfilled') {
           return { botId: res?.value?.bot_id ||'', response: res?.value };
         } else {
-          return { botId: rres?.value?.bot_id ||'', error: res.reason };
+          return { botId: res?.value?.bot_id ||'', error: res.reason };
         }
       });
     await adminDb.collection('webhooks').add({
