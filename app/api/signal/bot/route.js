@@ -64,9 +64,9 @@ export async function POST(request) {
     );
     const resultMap = result.map((res) => {
         if (res.status === 'fulfilled') {
-          return { botId: res.value.bot_id, response: res.value };
+          return { botId: res?.value?.bot_id ||'', response: res?.value };
         } else {
-          return { botId: res.reason.bot_id, error: res.reason };
+          return { botId: rres?.value?.bot_id ||'', error: res.reason };
         }
       });
     await adminDb.collection('webhooks').add({
