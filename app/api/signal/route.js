@@ -8,12 +8,14 @@ export async function POST (request) {
             createdAt : new Date(),
             type: 'signal'
         });
+        console.log('added signal ' + JSON.stringify(body));
         return Response.json({
             status : true,
             mesage: 'Signal added successfully',
             id : res?.id
         })
     } catch (error) {
+        console.error('error sending signal with error ::::',error.message)
         return Response.json({
             status : false,
             message : error.message,
