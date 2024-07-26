@@ -82,7 +82,7 @@ export async function POST(request) {
       ...body,
       type: 'autotrade',
       createdAt: new Date(),
-      result: result.map((x) => x?.status),
+    //   result: result.map((x) => x?.status),
     });
 
     return new Response('ok', {
