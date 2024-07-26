@@ -3,7 +3,7 @@ import { adminDb } from '../../../../lib/firebase-admin-config';
 export async function POST(request) {
   try {
     const body = await request.json();
-
+    console.log(body)
     // THIS IS WHAT THE BODY LOOKS LIKE :
     // {
     //   message_type: 'bot',
