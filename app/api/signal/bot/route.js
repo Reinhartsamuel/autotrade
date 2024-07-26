@@ -60,17 +60,18 @@ export async function POST(request) {
           })
       )
     );
-    const resultMap = result.map((res) => {
-        if (res.status === 'fulfilled') {
-          return { botId: res?.value?.bot_id ||'', response: res?.value };
-        } else {
-          return { botId: res?.value?.bot_id ||'', error: res.reason };
-        }
-      });
+    // const resultMap = result.map((res) => {
+    //     if (res.status === 'fulfilled') {
+    //       return { botId: res?.value?.bot_id ||'', response: res?.value };
+    //     } else {
+    //       return { botId: res?.value?.bot_id ||'', error: res.reason };
+    //     }
+    //   });
+    console.log(result, 'result promise allsettled');
     await adminDb.collection('webhooks').add({
       ...body,
       type: 'autotrade',
-      result: resultMap,
+    //   result: resultMap,
     });
   } catch (error) {
     console.log(error.message, 'error autotrade');
