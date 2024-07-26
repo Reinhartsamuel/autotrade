@@ -13,6 +13,16 @@ export async function POST(request) {
     //   pair: 'USDT_BTC',
     //   trading_plan_id: 'XMA_USDT_BTC',
     // };
+    // ------ OR -------
+    // {
+    //     "action": "close_at_market_price",
+    //     "message_type": "bot",
+    //     "bot_id": “”,
+    //     "email_token": "52c6860e-5814-47ed-a5ae-663d78446439",
+    //     "delay_seconds": 0,
+    //     "pair": "USDT_BTC”,
+    //     "trading_plan_id" : “XMA_USDT_BTC”
+    //   }
 
     // THIS IS WHAT SHOULD BE SENT TO 3COMMAS :
     // {
@@ -30,7 +40,10 @@ export async function POST(request) {
       .doc(body?.trading_plan_id)
       .get();
     if (!doc.exists) {
-      console.log(`No such document! id ::: ${body?.trading_plan_id}, timestamp : `, new Date().getTime());
+      console.log(
+        `No such document! id ::: ${body?.trading_plan_id}, timestamp : `,
+        new Date().getTime()
+      );
     }
     const data = doc.data();
     const botsArray = data?.bots_id || [];
@@ -43,35 +56,36 @@ export async function POST(request) {
     }
 
     const result = await Promise.allSettled(
-      botsArray?.map(
-        async (x) =>
-          await fetch(threeCommasUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              message_type: 'bot',
-              bot_id: parseInt(x),
-              email_token: body?.email_token,
-              delay_seconds: body?.delay_seconds,
-              pair: body?.pair,
-            }),
-          })
-      )
+      botsArray?.map(async (x) => {
+        const sendBodyTo3Commas = {
+          message_type: 'bot',
+          bot_id: parseInt(x),
+          email_token: body?.email_token,
+          delay_seconds: body?.delay_seconds,
+          pair: body?.pair,
+        };
+        if (body?.action) sendBodyTo3Commas.action = body?.action;
+        await fetch(threeCommasUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(sendBodyTo3Commas),
+        });
+      })
     );
 
     // console.log(resultMap, 'resultMap promise allsettled');
     await adminDb.collection('webhooks').add({
       ...body,
       type: 'autotrade',
-      createdAt : new Date(),
+      createdAt: new Date(),
       result: result.map((x) => x?.status),
     });
 
     return new Response('ok', {
-        status : 200
-    })
+      status: 200,
+    });
   } catch (error) {
     console.log(error.message, 'error autotrade');
     return new Response(error.message, {
