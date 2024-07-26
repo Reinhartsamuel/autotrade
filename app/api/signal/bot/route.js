@@ -41,7 +41,7 @@ export async function POST(request) {
       .get();
     if (!doc.exists) {
       console.log(
-        `No such document! id ::: ${body?.trading_plan_id}, timestamp : `,
+        `No such document! id ::: ${body?.trading_plan_id || ''}, timestamp : `,
         new Date().getTime()
       );
     }
@@ -65,13 +65,15 @@ export async function POST(request) {
           pair: body?.pair,
         };
         if (body?.action) sendBodyTo3Commas.action = body?.action;
-        await fetch(threeCommasUrl, {
+        const res = await fetch(threeCommasUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(sendBodyTo3Commas),
         });
+        const returnValue = await res.json();
+        return returnValue;
       })
     );
 
