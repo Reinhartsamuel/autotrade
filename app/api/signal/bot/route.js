@@ -3,7 +3,7 @@ import { adminDb } from '../../../../lib/firebase-admin-config';
 export async function POST(request) {
   try {
     const body = await request.json();
-    console.log(body)
+    console.log(body);
     // THIS IS WHAT THE BODY LOOKS LIKE :
     // {
     //   message_type: 'bot',
@@ -29,6 +29,11 @@ export async function POST(request) {
       .collection('test_bot')
       .doc(body?.trading_plan_id)
       .get();
+    if (!doc.exists) {
+      console.log('No such document!');
+    } else {
+      console.log('Document data:', doc.data());
+    }
     const data = doc.data();
     const botsArray = data?.bots_id || [];
 
