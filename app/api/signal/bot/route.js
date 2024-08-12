@@ -3,6 +3,12 @@ import { adminDb } from '../../../../lib/firebase-admin-config';
 export async function POST(request) {
   try {
     const body = await request.json();
+    await adminDb.collection('webhooks').add({
+      ...body,
+      type: 'autotrade',
+      createdAt: new Date(),
+    //   result: result.map((x) => x?.status),
+    });
     // console.log(body);
     // THIS IS WHAT THE BODY LOOKS LIKE :
     // {
@@ -81,12 +87,7 @@ export async function POST(request) {
     );
 
     // console.log(resultMap, 'resultMap promise allsettled');
-    await adminDb.collection('webhooks').add({
-      ...body,
-      type: 'autotrade',
-      createdAt: new Date(),
-    //   result: result.map((x) => x?.status),
-    });
+
 
     return new Response('ok', {
       status: 200,
