@@ -65,7 +65,7 @@ export async function POST(request) {
     }
 
     const result = await Promise.allSettled(
-      botsArray?.map(async (x) => {
+      botsArray?.map(async (x, i) => {
         const sendBodyTo3Commas = {
           message_type: 'bot',
           bot_id: parseInt(x),
@@ -81,6 +81,7 @@ export async function POST(request) {
           },
           body: JSON.stringify(sendBodyTo3Commas),
         });
+        if (parseInt(i) == 0) console.log(sendBodyTo3Commas, 'sendBodyTo3Commas');
         const returnValue = await res.json();
         return returnValue;
       })
