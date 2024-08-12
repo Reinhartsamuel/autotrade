@@ -34,10 +34,13 @@ export async function POST(request) {
     // };
     const threeCommasUrl = 'https://app.3commas.io/trade_signal/trading_view';
 
+    // trading_plan_id is constructed of trading plan name and pair 
+    const tp_unique_id = body?.trading_plan_id + '_' + body?.pair;
+
     // find bots id
     const doc = await adminDb
-      .collection('test_bot')
-      .doc(body?.trading_plan_id)
+      .collection('trading_plan_pair')
+      .doc(tp_unique_id)
       .get();
     if (!doc.exists) {
       console.log(
