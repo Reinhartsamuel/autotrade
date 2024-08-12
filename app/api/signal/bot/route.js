@@ -84,7 +84,7 @@ export async function POST(request) {
         if (parseInt(i) == 0) console.log(JSON.stringify(sendBodyTo3Commas), 'sendBodyTo3Commas');
         const returnValue = await res.json();
         await adminDb.collection('3commas_logs').add({
-          ...sendBodyTo3Commas,
+          sendBodyTo3Commas:JSON.stringify(sendBodyTo3Commas),
           createdAt: new Date(),
           returnValue
         });
