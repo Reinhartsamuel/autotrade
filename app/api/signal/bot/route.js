@@ -1,16 +1,8 @@
 import { adminDb } from '../../../../lib/firebase-admin-config';
+const threeCommasUrl = 'https://app.3commas.io/trade_signal/trading_view';
 
-export async function POST(request) {
-  try {
-    const body = await request.json();
-    await adminDb.collection('webhooks').add({
-      ...body,
-      type: 'autotrade',
-      createdAt: new Date(),
-    //   result: result.map((x) => x?.status),
-    });
-    // console.log(body);
-    // THIS IS WHAT THE BODY LOOKS LIKE :
+
+// THIS IS WHAT THE BODY LOOKS LIKE :
     // {
     //   message_type: 'bot',
     //   bot_id: '',
@@ -38,9 +30,22 @@ export async function POST(request) {
     //   delay_seconds: 0,
     //   pair: '',
     // };
-    const threeCommasUrl = 'https://app.3commas.io/trade_signal/trading_view';
 
-    // trading_plan_id is constructed of trading plan name and pair 
+
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    await adminDb.collection('webhooks').add({
+      ...body,
+      type: 'autotrade',
+      createdAt: new Date(),
+        // result: result.map((x) => x?.status),
+    });
+    // console.log(body);
+    
+
+    // trading_plan_id is constructed of trading plan name and pair
     const tp_unique_id = body?.trading_plan_id + '_' + body?.pair;
 
     // find bots id
@@ -65,10 +70,10 @@ export async function POST(request) {
     }
 
     const result = await Promise.allSettled(
-      botsArray?.map(async (x, i) => {
+      botsArray?.map(async (bot, i) => {
         const sendBodyTo3Commas = {
           message_type: 'bot',
-          bot_id: parseInt(x),
+          bot_id: parseInt(bot),
           email_token: body?.email_token,
           delay_seconds: body?.delay_seconds,
           pair: body?.pair,
@@ -81,20 +86,24 @@ export async function POST(request) {
           },
           body: JSON.stringify(sendBodyTo3Commas),
         });
-        if (parseInt(i) == 0) console.log(JSON.stringify(sendBodyTo3Commas), 'sendBodyTo3Commas');
-        const returnValue = await res.json();
-        await adminDb.collection('3commas_logs').add({
-          sendBodyTo3Commas:JSON.stringify(sendBodyTo3Commas),
-          createdAt: new Date(),
-          returnValue
-        });
-        return returnValue;
+        if (parseInt(i) == 0)
+          console.log(JSON.stringify(sendBodyTo3Commas), 'sendBodyTo3Commas');
+        const returnValue = await res.text();
+        return { ...returnValue, statusCode: res.status };
       })
     );
 
-    // console.log(resultMap, 'resultMap promise allsettled');
-
-
+    if (Array.isArray(result) && result?.length > 0) {
+      await Promise.allSettled(
+        result?.map(async (x) => {
+          await adminDb.collection('3commas_logs').add({
+            requestBody: JSON.stringify(body),
+            createdAt: new Date(),
+            response: x,
+          });
+        })
+      );
+    }
     return new Response('ok', {
       status: 200,
     });
