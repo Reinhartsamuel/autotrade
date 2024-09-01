@@ -7,33 +7,38 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
-    const result = await Promise.allSettled(
-      botsArray?.map(async (bot, i) => {
-        try {
-          const sendBodyTo3Commas = {
-            message_type: 'bot',
-            bot_id: parseInt(bot),
-            email_token: body?.email_token,
-            delay_seconds: body?.delay_seconds,
-            pair: body?.pair,
-          };
-          if (body?.action) sendBodyTo3Commas.action = body?.action;
-          const res = await fetch(threeCommasUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(sendBodyTo3Commas),
-          });
-          // const returnValue = await res.json();
-          const returnValue = await res.text();
-          console.log(returnValue, 'returnValue');
-          return { ...returnValue, statusCode: res.status };
-        } catch (error) {
-          return error.message;
-        }
-      })
-    );
+    // const result = await Promise.allSettled(
+    //   botsArray?.map(async (bot, i) => {
+    //     try {
+    //       const sendBodyTo3Commas = {
+    //         message_type: 'bot',
+    //         bot_id: parseInt(bot),
+    //         email_token: body?.email_token,
+    //         delay_seconds: body?.delay_seconds,
+    //         pair: body?.pair,
+    //       };
+    //       if (body?.action) sendBodyTo3Commas.action = body?.action;
+    //       const res = await fetch(threeCommasUrl, {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(sendBodyTo3Commas),
+    //       });
+    //       // const returnValue = await res.json();
+    //       const returnValue = await res.text();
+    //       console.log(returnValue, 'returnValue');
+    //       return { ...returnValue, statusCode: res.status };
+    //     } catch (error) {
+    //       return error.message;
+    //     }
+    //   })
+    // );
+    const res = await adminDb.collection('webhooks').add({
+      test:'test',
+      createdAt : new Date
+    })
+    console.log(id)
 
     // if (Array.isArray(result) && result?.length > 0) {
     //   await Promise.allSettled(
@@ -48,8 +53,8 @@ export async function POST(request) {
     // }
     // console.log(result, ':::this is the result');
     return Response.json({
-      result,
-      message: 'hello world',
+      id: res.id,
+      message: 'id created',
       status: 'success',
     });
   } catch (error) {

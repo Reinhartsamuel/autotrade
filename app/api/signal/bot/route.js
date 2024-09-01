@@ -36,7 +36,7 @@ const threeCommasUrl = 'https://app.3commas.io/trade_signal/trading_view';
 export async function POST(request) {
   try {
     const body = await request.json();
-    await adminDb.collection('webhooks').add({
+    const addWebhookResult = await adminDb.collection('webhooks').add({
       ...body,
       type: 'autotrade',
       createdAt: new Date(),
@@ -100,6 +100,7 @@ export async function POST(request) {
             requestBody: JSON.stringify(body),
             createdAt: new Date(),
             response: x,
+            webhookId : addWebhookResult?.id || ''
           });
         })
       );
