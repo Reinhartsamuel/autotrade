@@ -89,7 +89,7 @@ export async function POST(request) {
         if (parseInt(i) == 0)
           console.log(JSON.stringify(sendBodyTo3Commas), 'sendBodyTo3Commas');
         const returnValue = await res.text();
-        return { ...returnValue, statusCode: res.status };
+        return { ...returnValue, statusCode: res.status,  sendBodyTo3Commas};
       })
     );
 
@@ -100,6 +100,7 @@ export async function POST(request) {
             requestBody: JSON.stringify(body),
             createdAt: new Date(),
             response: x,
+            autotradePostBody:x?.sendBodyTo3Commas,
             webhookId : addWebhookResult?.id || ''
           });
         })
