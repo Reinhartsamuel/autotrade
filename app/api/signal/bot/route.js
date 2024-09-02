@@ -100,7 +100,7 @@ export async function POST(request) {
             requestBody: JSON.stringify(body),
             createdAt: new Date(),
             response: x,
-            autotradePostBody:x?.sendBodyTo3Commas,
+            autotradePostBody:x?.sendBodyTo3Commas || null,
             webhookId : addWebhookResult?.id || ''
           });
         })
