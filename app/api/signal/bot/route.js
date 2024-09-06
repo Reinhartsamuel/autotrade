@@ -51,33 +51,38 @@ export async function POST(request) {
       .doc(tp_unique_id)
       .get();
     if (!doc.exists) {
-      console.log(
-        `No such document! id ::: ${body?.trading_plan_id || ''}, timestamp : `,
-        new Date().getTime(), 'creating', tp_unique_id
-      );
-      await adminDb.collection('trading_plan_pair').add({
-        bots_id: [],
-        createdAt: new Date(),
-        lastUpdated: new Date(),
-        pair: body?.pair,
-        trading_plan_id: tp_unique_id
-      });
-      const tradingPlanDoc = await adminDb
-        .collection('trading_plan')
-        .doc(body.trading_plan_id)
-        .get();
-
-      if (!tradingPlanDoc.exists) {
-        await adminDb.collection('trading_plans').doc(body.trading_plan_id).set({
-          id: body?.trading_plan_id || '',
-          name: body?.trading_plan_id || '',
-          childrenPairs : FieldValue.arrayUnion(body?.pair),
+      try {
+        console.log(
+          `No such document! id ::: ${body?.trading_plan_id || ''}, timestamp : `,
+          new Date().getTime(), 'creating', tp_unique_id
+        );
+        await adminDb.collection('trading_plan_pair').doc(tp_unique_id).set({
+          bots_id: [],
+          createdAt: new Date(),
+          lastUpdated: new Date(),
+          pair: body?.pair,
+          trading_plan_id: body.trading_plan_id
         });
+        const tradingPlanDoc = await adminDb
+          .collection('trading_plan')
+          .doc(body.trading_plan_id)
+          .get();
+  
+        if (!tradingPlanDoc.exists) {
+          console.log(`trading plan not found, creating ID : ${body.trading_plan_id}`);
+          await adminDb.collection('trading_plans').doc(body.trading_plan_id).set({
+            id: body?.trading_plan_id || '',
+            name: body?.trading_plan_id || '',
+            childrenPairs : FieldValue.arrayUnion(body?.pair),
+          });
+        }
+  
+        return new Response('no bots!', {
+          status: 400,
+        });
+      } catch (error) {
+        
       }
-
-      return new Response('no bots!', {
-        status: 400,
-      });
     }
     const data = doc.data();
     const botsArray = data?.bots_id || [];
