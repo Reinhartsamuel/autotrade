@@ -1,37 +1,35 @@
 import { adminDb } from '../../../../lib/firebase-admin-config';
 const threeCommasUrl = 'https://app.3commas.io/trade_signal/trading_view';
-
+const {  FieldValue } = require('firebase-admin/firestore');
 
 // THIS IS WHAT THE BODY LOOKS LIKE :
-    // {
-    //   message_type: 'bot',
-    //   bot_id: '',
-    //   email_token: '52c6860e-5814-47ed-a5ae-663d78446439',
-    //   delay_seconds: 0,
-    //   pair: 'USDT_BTC',
-    //   trading_plan_id: 'XMA_USDT_BTC',
-    // };
-    // ------ OR -------
-    // {
-    //     "action": "close_at_market_price",
-    //     "message_type": "bot",
-    //     "bot_id": “”,
-    //     "email_token": "52c6860e-5814-47ed-a5ae-663d78446439",
-    //     "delay_seconds": 0,
-    //     "pair": "USDT_BTC”,
-    //     "trading_plan_id" : “XMA_USDT_BTC”
-    //   }
+// {
+//   message_type: 'bot',
+//   bot_id: '',
+//   email_token: '52c6860e-5814-47ed-a5ae-663d78446439',
+//   delay_seconds: 0,
+//   pair: 'USDT_BTC',
+//   trading_plan_id: 'XMA_USDT_BTC',
+// };
+// ------ OR -------
+// {
+//     "action": "close_at_market_price",
+//     "message_type": "bot",
+//     "bot_id": “”,
+//     "email_token": "52c6860e-5814-47ed-a5ae-663d78446439",
+//     "delay_seconds": 0,
+//     "pair": "USDT_BTC”,
+//     "trading_plan_id" : “XMA_USDT_BTC”
+//   }
 
-    // THIS IS WHAT SHOULD BE SENT TO 3COMMAS :
-    // {
-    //   message_type: 'bot',
-    //   bot_id: 14359731,
-    //   email_token: '',
-    //   delay_seconds: 0,
-    //   pair: '',
-    // };
-
-
+// THIS IS WHAT SHOULD BE SENT TO 3COMMAS :
+// {
+//   message_type: 'bot',
+//   bot_id: 14359731,
+//   email_token: '',
+//   delay_seconds: 0,
+//   pair: '',
+// };
 
 export async function POST(request) {
   try {
@@ -40,10 +38,9 @@ export async function POST(request) {
       ...body,
       type: 'autotrade',
       createdAt: new Date(),
-        // result: result.map((x) => x?.status),
+      // result: result.map((x) => x?.status),
     });
     // console.log(body);
-    
 
     // trading_plan_id is constructed of trading plan name and pair
     const tp_unique_id = body?.trading_plan_id + '_' + body?.pair;
@@ -56,8 +53,31 @@ export async function POST(request) {
     if (!doc.exists) {
       console.log(
         `No such document! id ::: ${body?.trading_plan_id || ''}, timestamp : `,
-        new Date().getTime()
+        new Date().getTime(), 'creating', tp_unique_id
       );
+      await adminDb.collection('trading_plan_pair').add({
+        bots_id: [],
+        createdAt: new Date(),
+        lastUpdated: new Date(),
+        pair: body?.pair,
+        trading_plan_id: tp_unique_id
+      });
+      const tradingPlanDoc = await adminDb
+        .collection('trading_plan')
+        .doc(body.trading_plan_id)
+        .get();
+
+      if (!tradingPlanDoc.exists) {
+        await adminDb.collection('trading_plans').doc(body.trading_plan_id).set({
+          id: body?.trading_plan_id || '',
+          name: body?.trading_plan_id || '',
+          childrenPairs : FieldValue.arrayUnion(body?.pair),
+        });
+      }
+
+      return new Response('no bots!', {
+        status: 400,
+      });
     }
     const data = doc.data();
     const botsArray = data?.bots_id || [];
@@ -89,7 +109,7 @@ export async function POST(request) {
         if (parseInt(i) == 0)
           console.log(JSON.stringify(sendBodyTo3Commas), 'sendBodyTo3Commas');
         const returnValue = await res.text();
-        return { ...returnValue, statusCode: res.status,  sendBodyTo3Commas};
+        return { ...returnValue, statusCode: res.status, sendBodyTo3Commas };
       })
     );
 
@@ -100,12 +120,15 @@ export async function POST(request) {
             requestBody: JSON.stringify(body),
             createdAt: new Date(),
             response: x,
-            autotradePostBody:x?.sendBodyTo3Commas || null,
-            webhookId : addWebhookResult?.id || ''
+            autotradePostBody: x?.sendBodyTo3Commas || null,
+            webhookId: addWebhookResult?.id || '',
           });
         })
       );
     }
+
+    // find if tradingplan already exists
+
     return new Response('ok', {
       status: 200,
     });
