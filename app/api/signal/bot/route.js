@@ -74,6 +74,7 @@ export async function POST(request) {
             id: body?.trading_plan_id || '',
             name: body?.trading_plan_id || '',
             childrenPairs : FieldValue.arrayUnion(body?.pair),
+            createdAt : new Date()
           });
         }
   
