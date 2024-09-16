@@ -128,6 +128,10 @@ export async function POST(request) {
             response: x,
             autotradePostBody: x?.sendBodyTo3Commas || null,
             webhookId: addWebhookResult?.id || '',
+            trading_plan_id : body?.trading_plan_id,
+            pair : body?.pair || '',
+            timeframe : body?.timeframe || '',
+            timestamp: body?.timestamp || '',
           });
         })
       );
