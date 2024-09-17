@@ -132,6 +132,7 @@ export async function POST(request) {
             pair : body?.pair || '',
             timeframe : body?.timeframe || '',
             timestamp: body?.timestamp || '',
+            type: 'autotrade'
           });
         })
       );
