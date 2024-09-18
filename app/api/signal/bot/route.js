@@ -132,6 +132,7 @@ export async function POST(request) {
             pair : body?.pair || '',
             timeframe : body?.timeframe || '',
             timestamp: body?.timestamp || '',
+            bot_id :(x?.value?.sendBodyTo3Commas?.bot_id).toString(),
             type: 'autotrade'
           });
         })
