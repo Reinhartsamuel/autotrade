@@ -122,6 +122,16 @@ export async function POST(request) {
     if (Array.isArray(result) && result?.length > 0) {
       await Promise.allSettled(
         result?.map(async (x) => {
+          let findBotOwner = {email:'', uid:'', name:''};
+          const botsRef = adminDb.collection('dca_bots');
+          const snapshot = await botsRef.where('bot_id', '==', x?.value?.sendBodyTo3Commas?.bot_id?.toString()).get();
+          if (!snapshot.empty) {
+            snapshot.forEach(doc => {
+              findBotOwner.email = doc.data()?.email || '';
+              findBotOwner.name = doc.data()?.name || '';
+              findBotOwner.uid = doc.data()?.uid || '';
+            });
+          } 
           await adminDb.collection('3commas_logs').add({
             requestBody: JSON.stringify(body),
             createdAt: new Date(),
