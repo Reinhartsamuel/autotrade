@@ -143,7 +143,8 @@ export async function POST(request) {
             timeframe : body?.timeframe || '',
             timestamp: body?.timestamp || '',
             bot_id :(x?.value?.sendBodyTo3Commas?.bot_id).toString(),
-            type: 'autotrade'
+            type: 'autotrade',
+            ...findBotOwner
           });
         })
       );
